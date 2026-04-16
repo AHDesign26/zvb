@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>ZVB | Електрически и умни системи</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="script.js" defer></script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body class="bg-background font-body text-on-surface antialiased overflow-x-hidden">
+    <!-- Global Vertical Wire Left -->
+    <div class="fixed left-8 top-0 h-full w-[1px] bg-slate-200/20 z-10 hidden lg:block">
+        <div class="wire-trace wire-v wire-trace-amber signal-v text-[#FFC107]"></div>
+    </div>
+    <!-- Global Vertical Wire Right -->
+    <div class="fixed right-8 top-0 h-full w-[1px] bg-slate-200/20 z-10 hidden lg:block">
+        <div class="wire-trace wire-v signal-v text-[#1A237E]" style="animation-delay: -2s;"></div>
+    </div>
+    <!-- TopNavBar -->
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b-[0.5px] border-indigo-200/30 shadow-sm transition-all">
+        <div class="flex justify-between items-center px-6 md:px-8 h-20 w-full max-w-screen-2xl mx-auto relative">
+            <a href="code.html">
+                <img src="./media/logo.png" alt="Logo" class="h-16 w-auto" />
+            </a>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-indigo-900 border-b-2 border-secondary pb-1 font-['Inter'] font-medium hover:text-secondary/80 transition-colors duration-300"
+                    href="#services">Услуги</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300"
+                    href="#projects">Проекти</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300"
+                    href="#about">За нас</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300"
+                    href="#contact">Контакт</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="request-form.html"
+                    class="hidden sm:block bg-primary text-white px-6 py-3 rounded-lg font-label font-bold text-sm hover:bg-primary/90 transition-all active:scale-95 relative overflow-hidden group">
+                    <span class="relative z-10">Заявете оферта</span>
+                    <div
+                        class="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                    </div>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-primary p-2" aria-label="Toggle menu"
+                    aria-expanded="false">
+                    <span id="menu-icon" class="material-symbols-outlined text-3xl leading-none">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu"
+            class="hidden flex-col absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-indigo-200/30 shadow-xl shadow-indigo-900/5">
+            <a class="mobile-link text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block"
+                href="#services">Услуги</a>
+            <a class="mobile-link text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block"
+                href="#projects">Проекти</a>
+            <a class="mobile-link text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block"
+                href="#about">За нас</a>
+            <a class="mobile-link text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block"
+                href="#contact">Контакт</a>
+            <div class="px-6 py-4">
+                <a href="request-form.html"
+                    class="block w-full bg-primary text-white px-6 py-4 rounded-lg font-label font-bold text-sm hover:bg-primary/90 transition-all text-center">
+                    Заявете оферта
+                </a>
+            </div>
+        </div>
+    </nav>
+    <main class="relative">
+        <!-- Hero Section -->
+        <section class="relative min-h-screen flex items-center px-6 md:px-8 pt-28 pb-8 overflow-hidden bg-primary">
+            <!-- Full-screen background image -->
+            <div class="absolute inset-0 z-0">
+                <img alt="Technical installation background" class="object-cover w-full h-full opacity-50"
+                    src="./media/hero.png" />
+                <!-- Blue overlay transparency adjusted to 20% (from 90%/50% to 20%/10% for a brighter look) -->
+                <div class="absolute inset-0 bg-gradient-to-r from-[#1A237E]/20 via-[#1A237E]/10 to-transparent"></div>
+            </div>
+            <!-- Technical Background Trace -->
+            <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none opacity-40">
+                <div class="absolute top-1/4 left-0 w-full h-[1px] bg-primary/30 signal-h text-white"
+                    style="animation-duration: 8s;"></div>
+                <div class="absolute top-2/3 left-0 w-full h-[1px] bg-secondary signal-h text-[#FFC107]"
+                    style="animation-duration: 12s; animation-delay: -3s;"></div>
+                <div class="absolute left-1/4 top-0 h-full w-[1px] bg-primary/30 signal-v text-white"
+                    style="animation-duration: 10s; animation-delay: -1s;"></div>
+                <div class="absolute left-3/4 top-0 h-full w-[1px] bg-secondary signal-v text-[#FFC107]"
+                    style="animation-duration: 15s; animation-delay: -5s;"></div>
+            </div>
+            <div class="max-w-7xl mx-auto w-full relative z-20">
+                <div class="flex flex-col xl:flex-row xl:justify-between xl:items-end w-full gap-12">
+                    <div class="max-w-3xl">
+                        <div class="inline-flex items-center gap-4 mb-6 reveal-on-scroll">
+                            <div class="relative w-16 h-[1px] bg-secondary overflow-hidden">
+                                <div class="absolute inset-0 signal-h text-[#FFC107]"></div>
+                            </div>
+                            <span
+                                class="text-secondary font-label font-bold tracking-widest text-xs uppercase">Електрически и умни системи</span>
+                        </div>
+                        <h1 class="font-headline text-4xl sm:text-5xl md:text-8xl font-bold text-white leading-[1.1] mb-8 tracking-tight reveal-on-scroll"
+                            style="transition-delay: 0.1s">
+                            Вашето пространство, <br class="hidden sm:inline" />
+                            <span class="text-secondary">свързано с бъдещето</span>
+                        </h1>
+                        <p class="text-indigo-100 text-base md:text-2xl max-w-xl mb-10 leading-relaxed reveal-on-scroll"
+                            style="transition-delay: 0.2s">
+                            От електрически инсталации до системи за умен дом и CCTV — предоставяме надеждни, висококачествени решения за жилищни и търговски проекти.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 mt-10">
+                            <a href="#services"
+                                class="text-primary bg-secondary px-8 py-4 sm:px-10 sm:py-5 rounded-lg font-label font-bold tracking-wide hover:shadow-xl hover:brightness-110 transition-all relative group overflow-hidden">
+                                <span class="relative z-10">Разгледайте услугите</span>
+                            </a>
+                            <a href="#projects"
+                                class="bg-surface text-primary px-8 py-4 sm:px-10 sm:py-5 rounded-lg font-label font-bold tracking-wide hover:shadow-xl hover:brightness-95 transition-all">
+                                Вижте проектите ни
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Metric as a floating element in hero -->
+                    <div class="hidden md:block">
+                        <div
+                            class="inline-block bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-secondary">
+                            <p class="font-label text-xs text-secondary uppercase mb-1 tracking-widest">Удовлетвореност на клиентите
+                            </p>
+                            <div class="flex items-baseline gap-4">
+                                <p class="font-headline text-4xl font-bold text-white">98%</p>
+                                <p class="text-indigo-200 text-sm max-w-[180px]">Удовлетвореност при 100+ завършени проекта.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section (Bento Grid) -->
+        <section class="py-20 md:py-32 px-4 sm:px-6 md:px-12 bg-background relative" id="services">
+            <!-- Connecting Wire -->
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-secondary/30 signal-v text-[#FFC107]">
+            </div>
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-24 gap-8">
+                    <div class="max-w-2xl reveal-on-scroll">
+                        <span class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block">Нашите услуги</span>
+                        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">Пълен набор от технически услуги</h2>
+                        <p class="text-on-surface-variant text-lg leading-relaxed">От електрически инсталации до интеграция на умен дом — покриваме всеки аспект на системите на вашия имот, изградени да издържат с 15 години опит зад нас.</p>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-8">
+                    <!-- Electrical Card -->
+                    <div class="md:col-span-2 group bg-white p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl relative overflow-hidden reveal-on-scroll">
+                        <span
+                            class="material-symbols-outlined text-secondary text-4xl mb-6 block transition-transform group-hover:translate-y-[-4px]"
+                            data-icon="electric_bolt">electric_bolt</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">Електроинженерство</h3>
+                        <p class="text-on-surface-variant text-base leading-relaxed mb-10">Пълни електрически инсталации за жилищни и промишлени проекти — от окабеляване и разпределителни табла до цялостни електрически инсталации, изпълнени по най-висок стандарт.</p>
+                        <ul class="space-y-4 text-xs font-bold text-primary">
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Жилищно окабеляване</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Промишлени инсталации</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Разпределителни табла</li>
+                        </ul>
+                    </div>
+                    <!-- CCTV Card -->
+                    <div class="md:col-span-2 p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl group reveal-on-scroll"
+                        style="transition-delay: 0.1s; background-color: #f5f5f5;">
+                        <span
+                            class="material-symbols-outlined text-secondary text-4xl mb-6 block transition-transform group-hover:translate-y-[-4px]"
+                            data-icon="videocam">videocam</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">Сигурност и CCTV</h3>
+                        <p class="text-on-surface-variant text-base leading-relaxed mb-10">Професионални CCTV и системи за наблюдение, за да поддържате имота си защитен — инсталирани, конфигурирани и поддържани от нашия екип.</p>
+                        <a class="inline-flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest hover:gap-4 transition-all"
+                            href="#">Вижте спецификациите <span class="material-symbols-outlined text-lg"
+                                data-icon="arrow_forward">arrow_forward</span></a>
+                    </div>
+                    <!-- IT Infrastructure -->
+                    <div class="md:col-span-2 p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl group reveal-on-scroll bg-slate-100"
+                        style="transition-delay: 0.2s">
+                        <span
+                            class="material-symbols-outlined text-primary text-4xl mb-6 block transition-transform group-hover:translate-y-[-4px]"
+                            data-icon="lan">lan</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">IT Инфраструктура</h3>
+                        <p class="text-on-surface-variant text-base leading-relaxed mb-10">Структурно окабеляване и мрежова инфраструктура, която поддържа вашия дом или офис надеждно свързан и готов за развитие.</p>
+                        <a class="inline-flex items-center gap-2 text-primary font-bold text-xs uppercase tracking-widest hover:gap-4 transition-all"
+                            href="#">Вижте спецификациите <span class="material-symbols-outlined text-lg"
+                                data-icon="arrow_forward">arrow_forward</span></a>
+                    </div>
+                    <!-- Solar Card -->
+                    <div class="md:col-span-2 group bg-slate-100 p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl relative overflow-hidden reveal-on-scroll"
+                        style="transition-delay: 0.3s">
+                        <span
+                            class="material-symbols-outlined text-primary text-4xl mb-6 block transition-transform group-hover:scale-110"
+                            data-icon="solar_power">solar_power</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">Слънчеви енергийни системи</h3>
+                        <p class="text-on-surface-variant text-base mb-10">Слънчеви енергийни решения за жилищни и промишлени имоти — намаляване на енергийните разходи и изграждане на по-устойчиво бъдеще.</p>
+                        <button
+                            class="bg-primary text-white px-8 py-3 rounded-lg font-label font-bold text-[10px] uppercase hover:bg-secondary hover:text-primary transition-all">Устойчива енергия</button>
+                    </div>
+                    <!-- Smart Home Systems Card -->
+                    <div class="md:col-span-2 group bg-white p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl relative overflow-hidden reveal-on-scroll"
+                        style="transition-delay: 0.4s; background-color: #f5f5f5;">
+                        <span
+                            class="material-symbols-outlined text-secondary text-4xl mb-6 block transition-transform group-hover:scale-110"
+                            data-icon="hub">hub</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">Системи за умен дом</h3>
+                        <p class="text-on-surface-variant text-base mb-10">Управлявайте осветлението, климата, сигурността и развлеченията от една умна, интуитивна система.</p>
+                        <ul class="space-y-4 text-xs font-bold text-primary">
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Автоматизирано осветление</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Климатичен контрол</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Многостаен аудио</li>
+                        </ul>
+                    </div>
+                    <!-- Lighting Design Card -->
+                    <div class="md:col-span-2 p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl group reveal-on-scroll bg-white"
+                        style="transition-delay: 0.5s">
+                        <span
+                            class="material-symbols-outlined text-secondary text-4xl mb-6 block transition-transform group-hover:translate-y-[-4px]"
+                            data-icon="lightbulb">lightbulb</span>
+                        <h3 class="font-headline text-xl font-bold mb-6 text-primary">Дизайн на осветление</h3>
+                        <p class="text-on-surface-variant text-base leading-relaxed mb-10">Персонализирани решения за осветление за всяко пространство — от архитектурно акцентно осветление до енергоефективни LED инсталации.</p>
+                        <ul class="space-y-4 text-xs font-bold text-primary">
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> LED и умни управления</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Фасадно осветление</li>
+                            <li class="flex items-center gap-3"><span
+                                    class="w-2 h-2 bg-secondary rounded-full"></span> Аварийно осветление</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About Section -->
+        <section class="py-20 md:py-32 bg-slate-50 relative overflow-hidden" id="about">
+            <!-- Large Animated Background Trace -->
+            <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+                <div class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-secondary signal-h text-[#FFC107]"
+                    style="transform: rotate(15deg); animation-duration: 20s;"></div>
+                <div class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-primary signal-h text-[#1A237E]"
+                    style="transform: rotate(-15deg); animation-duration: 25s; animation-delay: -10s;"></div>
+            </div>
+            <div
+                class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center relative z-10">
+                <div class="reveal-on-scroll">
+                    <span class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block">За нас</span>
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-10 leading-snug">Качествена работа.<br />Трайни партньорства.</h2>
+                    <p class="text-on-surface-variant text-lg leading-relaxed mb-12">
+                        ZVB е специализирана компания за електрически и умни системи, предоставяща надеждни, висококачествени решения за съвременни жилищни и търговски проекти в България. С над 15 години практически опит, ние съчетаваме техническа прецизност с практическо изпълнение — осигурявайки всеки проект да бъде завършен ефективно и по най-висок стандарт.
+                    </p>
+                    <div class="grid grid-cols-1 gap-12">
+                        <div class="flex gap-6 group">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-secondary">
+                                <span class="material-symbols-outlined text-3xl" data-icon="verified">verified</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline text-lg font-bold text-primary mb-2">Доверени и сертифицирани</h4>
+                                <p class="text-on-surface-variant text-base leading-relaxed">Нашият екип е участвал активно в разнообразни проекти, работейки с утвърдени компании в разработки от малък до голям мащаб.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-6 group">
+                            <div
+                                class="flex-shrink-0 w-16 h-16 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-secondary">
+                                <span class="material-symbols-outlined text-3xl" data-icon="handshake">handshake</span>
+                            </div>
+                            <div>
+                                <h4 class="font-headline text-lg font-bold text-primary mb-2">Поддръжка след инсталация</h4>
+                                <p class="text-on-surface-variant text-base leading-relaxed">Нашата работа не спира при инсталацията — предоставяме текуща поддръжка, за да поддържаме всяка система надеждно работеща в дългосрочен план.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative reveal-on-scroll">
+                    <div
+                        class="relative h-[320px] sm:h-[420px] md:h-[500px] lg:h-[600px] w-full overflow-hidden rounded-3xl shadow-2xl">
+                        <img alt="Advanced Industrial Infrastructure"
+                            class="w-full h-full object-cover transition-all duration-1000"
+                            src="./media/1.png" />
+                    </div>
+                    <div
+                        class="absolute bottom-4 left-4 md:-bottom-6 md:-left-6 z-10 bg-primary text-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-[200px] md:max-w-[240px] border-b-8 border-secondary">
+                        <p class="text-3xl font-headline font-bold text-secondary mb-2">15+</p>
+                        <p class="text-xs font-label uppercase tracking-widest opacity-80 leading-snug">Години в захранването на домове и бизнеси</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Process Section -->
+        <section class="py-20 md:py-32 bg-white relative overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+                <div class="text-center mb-10 md:mb-24 reveal-on-scroll">
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">Нашият процес
+                    </h2>
+                    <p class="text-on-surface-variant text-lg max-w-xl mx-auto">Прости, прозрачни стъпки от първото посещение до финалното предаване — поддържаме всичко ясно и лесно на всяка стъпка.</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 relative" id="process-steps">
+                    <!-- Base line -->
+                    <div class="absolute top-10 left-0 w-full h-[2px] bg-slate-100 hidden md:block">
+                        <!-- Yellow fill line -->
+                        <div id="process-line-fill" class="absolute left-0 top-0 h-full bg-secondary" style="width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1);"></div>
+                    </div>
+                    <div class="relative group reveal-on-scroll text-left" data-step="1">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center font-headline text-2xl font-bold text-primary mb-10 relative z-10 group-hover:bg-primary group-hover:text-white transition-all shadow-xl">
+                            01
+                        </div>
+                        <h4 class="font-headline text-xl font-bold text-primary mb-4">Оглед на място</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Посещаваме обекта, оценяваме обхвата и разбираме точно какво изисква проектът.</p>
+                    </div>
+                    <div class="relative group reveal-on-scroll text-left" style="transition-delay: 0.1s" data-step="2">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center font-headline text-2xl font-bold text-primary mb-10 relative z-10 group-hover:bg-primary group-hover:text-white transition-all shadow-xl">
+                            02
+                        </div>
+                        <h4 class="font-headline text-xl font-bold text-primary mb-4">Изготвяне на оферта</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Изготвяме ясна, детайлна оферта, съобразена с вашите нужди, с прозрачно ценообразуване.</p>
+                    </div>
+                    <div class="relative group reveal-on-scroll text-left" style="transition-delay: 0.2s" data-step="3">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center font-headline text-2xl font-bold text-primary mb-10 relative z-10 group-hover:bg-primary group-hover:text-white transition-all shadow-xl">
+                            03
+                        </div>
+                        <h4 class="font-headline text-xl font-bold text-primary mb-4">Перфектен резултат</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Нашият екип изпълнява работата с прецизност, предоставяйки чиста, висококачествена инсталация навреме.</p>
+                    </div>
+                    <div class="relative group reveal-on-scroll text-left" style="transition-delay: 0.3s" data-step="4">
+                        <div
+                            class="w-16 h-16 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center font-headline text-2xl font-bold text-primary mb-10 relative z-10 group-hover:bg-primary group-hover:text-white transition-all shadow-xl">
+                            04
+                        </div>
+                        <h4 class="font-headline text-xl font-bold text-primary mb-4">Плащане</h4>
+                        <p class="text-on-surface-variant text-sm leading-relaxed">Просто и ясно — плащате само когато сте напълно доволни от извършената работа.</p>
+                    </div>
+                </div>
+                <script>
+                    (function () {
+                        const fill = document.getElementById('process-line-fill');
+                        const steps = document.querySelectorAll('#process-steps [data-step]');
+                        steps.forEach(step => {
+                            step.addEventListener('mouseenter', () => {
+                                const stepNum = parseInt(step.dataset.step);
+                                if (stepNum === 1) { fill.style.width = '0%'; return; }
+                                const icon = step.querySelector('div');
+                                const trackRect = fill.parentElement.getBoundingClientRect();
+                                const iconRect = icon.getBoundingClientRect();
+                                const iconCenter = iconRect.left + iconRect.width / 2;
+                                const pct = ((iconCenter - trackRect.left) / trackRect.width) * 100;
+                                fill.style.width = pct + '%';
+                            });
+                            step.addEventListener('mouseleave', () => {
+                                fill.style.width = '0%';
+                            });
+                        });
+                    })();
+                </script>
+            </div>
+        </section>
+        <!-- Technical Installations Section -->
+        <section class="py-20 md:py-32 bg-surface relative overflow-hidden" id="projects">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+                <div
+                    class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 md:mb-16 reveal-on-scroll">
+                    <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary">Технически инсталации</h2>
+                    <button
+                        class="text-primary font-bold border-b-2 border-secondary pb-1 flex items-center gap-3 hover:gap-5 transition-all text-[10px] uppercase tracking-widest shrink-0">
+                        Вижте казусите <span class="material-symbols-outlined text-lg"
+                            data-icon="north_east">north_east</span>
+                    </button>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                    <div
+                        class="md:col-span-8 group relative overflow-hidden rounded-3xl reveal-on-scroll" style="width:100%;height:400px;">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                            src="./media/2.png" />
+                        <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors"></div>
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-5 md:p-12 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                            <span
+                                class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-4 block">Електроинженерство</span>
+                            <h4 class="text-white font-headline text-2xl md:text-3xl font-bold">Електрически инсталации</h4>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 group relative overflow-hidden rounded-3xl reveal-on-scroll"
+                        style="width:100%;height:400px;transition-delay:0.1s;">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiie42Et6-4CaFGNiccCBQR1WFgQXBzbOtt1teHmlQOtiW3InuQGlPj3XHiFTxN3MBgs3jk6gCszFqXRKRmBO8Iw7vu9lluT0jVUg8pJhdtHxXwBTGz5c4YiAkxOqVnR36_mAFwdBbLf2kXzYuvWG7SpDg9NV9ghZf99bv_4AV2ior6c1gjytmU3pFRjYWy1lgWDM0cS9T8AvuVgSLJV_UqdxoUMl3NMXKbitfcH3lxI6O-UZuG90xFR6LMXi9nrzwfK7qWEeU-ow7" />
+                        <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors"></div>
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-5 md:p-12 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                            <span
+                                class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-4 block">IT Инфраструктура</span>
+                            <h4 class="text-white font-headline text-2xl font-bold">Структурно окабеляване и мрежи</h4>
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 group relative overflow-hidden rounded-3xl reveal-on-scroll"
+                        style="width:100%;height:400px;transition-delay:0.2s;">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                            src="./media/3.png" />
+                        <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors"></div>
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-5 md:p-12 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                            <span
+                                class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-4 block">Системи за умен дом</span>
+                            <h4 class="text-white font-headline text-2xl font-bold">Интеграция на умен дом</h4>
+                        </div>
+                    </div>
+                    <div class="md:col-span-8 group relative overflow-hidden rounded-3xl reveal-on-scroll"
+                        style="width:100%;height:400px;transition-delay:0.3s;">
+                        <img class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                            src="./media/4.png" />
+                        <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors"></div>
+                        <div
+                            class="absolute bottom-0 left-0 w-full p-5 md:p-12 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                            <span
+                                class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-4 block">Сигурност и CCTV</span>
+                            <h4 class="text-white font-headline text-2xl md:text-3xl font-bold">CCTV и системи за наблюдение</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials -->
+        <section class="py-20 md:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+                    <div class="reveal-on-scroll">
+                        <span
+                            class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block">Отзиви</span>
+                        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-8">Какво казват нашите клиенти
+                        </h2>
+                    </div>
+                    <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div class="reveal-on-scroll" style="transition-delay: 0.1s">
+                            <span class="material-symbols-outlined text-secondary text-3xl mb-6"
+                                data-icon="format_quote">format_quote</span>
+                            <p class="text-on-surface-variant text-base italic mb-8">"ZVB се справи с цялостната електрическа инсталация на новия ни дом. Всичко беше направено чисто, навреме и точно така, както беше договорено. Не бихме могли да сме по-доволни от резултата."</p>
+                            <div>
+                                <p class="font-bold text-primary text-lg">Георги Димитров</p>
+                                <p class="text-on-surface-variant text-[10px] uppercase tracking-widest">Собственик на жилище, София</p>
+                            </div>
+                        </div>
+                        <div class="reveal-on-scroll" style="transition-delay: 0.2s">
+                            <span class="material-symbols-outlined text-secondary text-3xl mb-6"
+                                data-icon="format_quote">format_quote</span>
+                            <p class="text-on-surface-variant text-base italic mb-8">"Наехме ZVB за CCTV и инсталация на структурно окабеляване в нашия офис. Професионален екип, прозрачно ценообразуване и системите работят безпроблемно от тогава."</p>
+                            <div>
+                                <p class="font-bold text-primary text-lg">Мартин Иванов</p>
+                                <p class="text-on-surface-variant text-[10px] uppercase tracking-widest">Собственик на бизнес, София</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="py-20 px-4 sm:px-8 md:px-12 bg-primary relative overflow-hidden text-center">
+            <div class="absolute inset-0 opacity-10 pointer-events-none">
+                <div class="absolute top-0 left-1/4 h-full w-[1px] signal-v text-white" style="animation-duration: 8s;">
+                </div>
+                <div class="absolute top-0 right-1/4 h-full w-[1px] signal-v text-[#FFC107]"
+                    style="animation-duration: 10s; animation-delay: -3s;"></div>
+                <div class="absolute top-1/2 left-0 w-full h-[1px] signal-h text-white"
+                    style="animation-duration: 15s;"></div>
+            </div>
+            <div class="max-w-4xl mx-auto relative z-10 reveal-on-scroll">
+                <h2 class="font-headline text-3xl md:text-4xl font-bold text-white mb-6">Готови ли сте да започнете вашия проект?
+                </h2>
+                <p class="text-indigo-100 text-lg mb-10 opacity-80 leading-relaxed max-w-xl mx-auto">Свържете се с нашия екип за безплатна консултация — ще оценим вашите нужди и ще предоставим ясна, детайлна оферта без задължение.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="tel:+35987794353"
+                        class="bg-secondary text-primary px-8 py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-xl">
+                        Обадете се сега
+                    </a>
+                    <a href="request-form.html"
+                        class="border border-white/30 text-white px-8 py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-white/10 transition-colors">
+                        Заявете оферта
+                    </a>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section class="py-20 md:py-32 bg-white relative" id="contact">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+                    <div class="reveal-on-scroll">
+                        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-8">Свържете се с нас</h2>
+                        <p class="text-on-surface-variant text-lg mb-8 md:mb-16">Свържете се с нас за оферти, запитвания за проекти или всякакви въпроси — с удоволствие ще помогнем.</p>
+                        <div class="space-y-8 md:space-y-12">
+                            <div class="flex gap-8 group">
+                                <div
+                                    class="contact-icon-bg w-14 h-14 rounded-full border border-slate-100 flex items-center justify-center text-secondary transition-colors">
+                                    <span class="material-symbols-outlined text-2xl" data-icon="call">call</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-primary text-lg mb-2">Телефон</h5>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed">+359 87 7944353</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 group">
+                                <div
+                                    class="contact-icon-bg w-14 h-14 rounded-full border border-slate-100 flex items-center justify-center text-secondary transition-colors">
+                                    <span class="material-symbols-outlined text-2xl" data-icon="mail">mail</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-primary text-lg mb-2">Имейл</h5>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed">contact@zvb.bg<br />info@zvb.bg</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-8 group">
+                                <div
+                                    class="contact-icon-bg w-14 h-14 rounded-full border border-slate-100 flex items-center justify-center text-secondary transition-colors">
+                                    <span class="material-symbols-outlined text-2xl"
+                                        data-icon="location_on">location_on</span>
+                                </div>
+                                <div>
+                                    <h5 class="font-bold text-primary text-lg mb-2">Адрес</h5>
+                                    <p class="text-on-surface-variant text-sm leading-relaxed">Sofia, Bulgaria</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-6 sm:p-10 md:p-16 rounded-3xl relative reveal-on-scroll"
+                        style="transition-delay: 0.2s">
+                        <div
+                            class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-4 border-r-4 border-secondary/20 rounded-tr-xl">
+                        </div>
+                        <form class="space-y-10">
+                            <div class="space-y-3">
+                                <label
+                                    class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Пълно име</label>
+                                <input
+                                    class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                                    placeholder="Иван Иванов" type="text" />
+                            </div>
+                            <div class="space-y-3">
+                                <label
+                                    class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Имейл</label>
+                                <input
+                                    class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                                    placeholder="ivan@example.com" type="email" />
+                            </div>
+                            <div class="space-y-3">
+                                <label
+                                    class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Интерес към услуга</label>
+                                <select
+                                    class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary shadow-sm">
+                                    <option>Електрически системи</option>
+                                    <option>IT Инфраструктура</option>
+                                    <option>Слънчеви решения</option>
+                                    <option>Сигурност / CCTV</option>
+                                    <option>Системи за умен дом</option>
+                                </select>
+                            </div>
+                            <div class="space-y-3">
+                                <label
+                                    class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Съобщение</label>
+                                <textarea
+                                    class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                                    placeholder="Кратко описание на проекта..." rows="4"></textarea>
+                            </div>
+                            <button
+                                class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl">
+                                <span class="relative z-10">Изпратете заявка</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-primary w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-white/10">
+            <div class="absolute inset-0 signal-h text-[#FFC107]" style="animation-duration: 15s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 relative z-10">
+            <div class="space-y-8">
+                <div>
+                    <img src="./media/logo-footer.png" alt="Logo" class="h-24 w-auto" />
+                </div>
+                <p class="text-indigo-100/60 text-sm leading-relaxed">Надеждни електрически и умни системи за жилищни и търговски проекти. Качествена работа, трайни резултати.</p>
+                <div class="flex gap-6">
+                    <span
+                        class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+                        data-icon="public">public</span>
+                    <span
+                        class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+                        data-icon="terminal">terminal</span>
+                    <span
+                        class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+                        data-icon="precision_manufacturing">precision_manufacturing</span>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Експертиза</h5>
+                <ul class="space-y-5 text-indigo-100/60 text-sm">
+                    <li><a class="hover:text-white transition-colors" href="#">Електроинженерство</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Сигурност и CCTV</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">IT Инфраструктура</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Слънчеви енергийни системи</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Системи за умен дом</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Дизайн на осветление</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Ресурси</h5>
+                <ul class="space-y-5 text-indigo-100/60 text-sm">
+                    <li><a class="hover:text-white transition-colors" href="#">За нас</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Протоколи за безопасност</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Сертификати</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Казуси</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Бюлетин</h5>
+                <p class="text-indigo-100/60 text-xs mb-6">Бъдете в крак с нашите последни новини и проекти.</p>
+                <div class="flex gap-2">
+                    <input
+                        class="bg-white border-white/10 rounded-lg px-4 py-3 text-sm text-primary w-full focus:ring-1 focus:ring-secondary focus:border-secondary"
+                        placeholder="Имейл адрес" type="email" />
+                    <button class="bg-secondary text-primary p-3 rounded-lg hover:brightness-110">
+                        <span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div
+            class="max-w-7xl mx-auto mt-10 md:mt-24 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">© 2025 ZVB. All rights reserved.</p>
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex gap-8 text-[10px] text-indigo-100/40 uppercase tracking-widest">
+                    <a class="hover:text-secondary transition-colors" href="#">Поверителност</a>
+                    <a class="hover:text-secondary transition-colors" href="#">Условия</a>
+                    <a class="hover:text-secondary transition-colors" href="#">Политика за бисквитки</a>
+                </div>
+                <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">Проектирано и разработено от <a href="https://ahdesign.website" target="_blank" class="hover:text-secondary transition-colors">AHDesign Co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})"
+        class="fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all duration-300 opacity-0 pointer-events-none"
+        style="background-color: var(--color-secondary);">
+        <span class="material-symbols-outlined font-bold" style="color: var(--color-primary);">arrow_upward</span>
+    </button>
+    <script>
+        const scrollBtn = document.getElementById('scroll-top-btn');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollBtn.classList.remove('opacity-0', 'pointer-events-none');
+                scrollBtn.classList.add('opacity-100');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'pointer-events-none');
+                scrollBtn.classList.remove('opacity-100');
+            }
+        });
+    </script>
+</body>
+
+</html>

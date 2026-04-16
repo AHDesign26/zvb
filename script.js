@@ -1,0 +1,80 @@
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+              "on-surface": "var(--color-on-surface)",
+              "secondary": "var(--color-secondary)",
+              "background": "var(--color-background)",
+              "surface": "var(--color-surface)",
+              "on-surface-variant": "var(--color-on-surface-variant)",
+              "primary": "var(--color-primary)",
+              "light-gray": "var(--color-light-gray)"
+      },
+      "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+      },
+      "fontFamily": {
+              "headline": ["Space Grotesk"],
+              "body": ["Inter"],
+              "label": ["Space Grotesk"]
+      }
+    },
+  },
+};
+
+// Mobile Menu Toggle
+document.addEventListener('DOMContentLoaded', () => {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', () => {
+            const isOpen = !mobileMenu.classList.contains('hidden');
+
+            if (isOpen) {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuIcon.textContent = 'menu';
+                menuBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                mobileMenu.classList.remove('hidden');
+                mobileMenu.classList.add('flex');
+                mobileMenu.style.flexDirection = 'column';
+                menuIcon.textContent = 'close';
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        // Close menu when a nav link is clicked
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                menuIcon.textContent = 'menu';
+                menuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+});
+
+// Scroll Reveal
+const reveal = () => {
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    reveals.forEach(el => {
+        const windowHeight = window.innerHeight;
+        const revealTop = el.getBoundingClientRect().top;
+        const revealPoint = 100;
+        if (revealTop < windowHeight - revealPoint) {
+            el.classList.add('active');
+        }
+    });
+};
+
+window.addEventListener('scroll', reveal);
+window.addEventListener('load', reveal);

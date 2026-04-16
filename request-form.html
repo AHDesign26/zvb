@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Заявка за проект | ZVB</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "var(--color-on-surface)",
+                        "secondary": "var(--color-secondary)",
+                        "background": "var(--color-background)",
+                        "surface": "var(--color-surface)",
+                        "on-surface-variant": "var(--color-on-surface-variant)",
+                        "primary": "var(--color-primary)",
+                        "light-gray": "var(--color-light-gray)"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Space Grotesk"]
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="style.css" rel="stylesheet" />
+</head>
+
+<body class="bg-background font-body text-on-surface antialiased overflow-x-hidden min-h-screen flex flex-col">
+
+    <!-- TopNavBar -->
+    <nav class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-md border-b-[0.5px] border-indigo-200/30 shadow-sm transition-all">
+        <div class="flex justify-between items-center px-6 md:px-8 h-20 w-full max-w-screen-2xl mx-auto relative">
+            <a href="code.html">
+                <img src="./media/logo.png" alt="Logo" class="h-16 w-auto" />
+            </a>
+            <div class="hidden md:flex items-center gap-10">
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300" href="code.html#services">Услуги</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300" href="code.html#projects">Проекти</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300" href="code.html#about">За нас</a>
+                <a class="text-slate-600 font-['Inter'] font-medium hover:text-secondary transition-colors duration-300" href="code.html#contact">Контакт</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="request-form.html"
+                    class="hidden sm:block bg-primary text-white px-6 py-3 rounded-lg font-label font-bold text-sm hover:bg-primary/90 transition-all active:scale-95 relative overflow-hidden group">
+                    <span class="relative z-10">Заявете оферта</span>
+                    <div class="absolute inset-0 bg-secondary translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                </a>
+                <button id="mobile-menu-btn" class="md:hidden text-primary p-2" aria-label="Toggle menu" aria-expanded="false">
+                    <span id="menu-icon" class="material-symbols-outlined text-3xl leading-none">menu</span>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden flex-col absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-indigo-200/30 shadow-xl shadow-indigo-900/5">
+            <a class="text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block" href="code.html#services">Услуги</a>
+            <a class="text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block" href="code.html#projects">Проекти</a>
+            <a class="text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block" href="code.html#about">За нас</a>
+            <a class="text-indigo-900 font-['Inter'] font-medium px-6 py-4 border-b border-indigo-100 block" href="code.html#contact">Контакт</a>
+            <div class="px-6 py-4">
+                <a href="request-form.html" class="block w-full bg-primary text-white px-6 py-4 rounded-lg font-label font-bold text-sm hover:bg-primary/90 transition-all text-center">
+                    Заявете оферта
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Global Vertical Wire Left -->
+    <div class="fixed left-8 top-0 h-full w-[1px] bg-slate-200/20 z-10 hidden lg:block">
+        <div class="wire-trace wire-v wire-trace-amber signal-v text-[#FFC107]"></div>
+    </div>
+    <!-- Global Vertical Wire Right -->
+    <div class="fixed right-8 top-0 h-full w-[1px] bg-slate-200/20 z-10 hidden lg:block">
+        <div class="wire-trace wire-v signal-v text-[#1A237E]" style="animation-delay: -2s;"></div>
+    </div>
+
+    <div class="flex-1 flex items-center justify-center pt-36 pb-16 px-4 sm:px-6 md:px-12">
+    <div class="w-full max-w-4xl">
+
+        <!-- Header -->
+        <div class="mb-10 text-center">
+            <span class="font-label font-bold tracking-widest uppercase block mb-3" style="font-size: 0.75rem; color: var(--color-on-surface-variant-50);">Заявка за проект</span>
+            <h1 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">Разкажете ни за вашия проект</h1>
+            <p class="text-on-surface-variant text-base">Попълнете данните по-долу и нашият екип ще се свърже с вас възможно най-скоро.</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="bg-slate-50 p-6 sm:p-10 md:p-14 rounded-3xl relative">
+
+            <!-- Decorative corner -->
+            <div class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-4 border-r-4 rounded-tr-xl" style="border-color: var(--color-secondary-alpha);"></div>
+            <div class="hidden sm:block absolute bottom-6 left-6 w-12 h-12 border-b-4 border-l-4 rounded-bl-xl" style="border-color: var(--color-primary-50);"></div>
+
+            <form class="space-y-8">
+
+                <!-- Name & Company — side by side on md+ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Пълно име</label>
+                        <input
+                            class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                            placeholder="Иван Иванов"
+                            type="text" />
+                    </div>
+                    <div class="space-y-3">
+                        <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Фирма (незадължително)</label>
+                        <input
+                            class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                            placeholder="Вашата фирма"
+                            type="text" />
+                    </div>
+                </div>
+
+                <!-- Email & Phone — side by side on md+ -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-3">
+                        <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Имейл адрес</label>
+                        <input
+                            class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                            placeholder="ivan@example.com"
+                            type="email" />
+                    </div>
+                    <div class="space-y-3">
+                        <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Телефонен номер</label>
+                        <input
+                            class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                            placeholder="+359 00 000 0000"
+                            type="tel" />
+                    </div>
+                </div>
+
+                <!-- Project Type -->
+                <div class="space-y-3">
+                    <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Тип проект</label>
+                    <select
+                        class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary shadow-sm">
+                        <option value="" disabled selected>Изберете услуга...</option>
+                        <option>Електрически системи</option>
+                        <option>IT Инфраструктура</option>
+                        <option>Слънчеви решения</option>
+                        <option>Сигурност / CCTV</option>
+                        <option>Системи за умен дом</option>
+                        <option>Друго</option>
+                    </select>
+                </div>
+
+                <!-- Message -->
+                <div class="space-y-3">
+                    <label class="font-label text-[10px] font-bold uppercase tracking-widest text-primary">Детайли за проекта</label>
+                    <textarea
+                        class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                        placeholder="Опишете обхвата на проекта, времевата рамка и всякакви специфични изисквания..."
+                        rows="5"></textarea>
+                </div>
+
+                <!-- Submit -->
+                <button
+                    class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl">
+                    <span class="relative z-10 flex items-center justify-center gap-3">
+                        Изпратете заявка
+                        <span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;">arrow_forward</span>
+                    </span>
+                </button>
+
+            </form>
+        </div>
+
+        <!-- Footer note -->
+        <p class="text-center text-on-surface-variant text-xs mt-8">Обикновено отговаряме в рамките на <span class="font-bold text-primary">24 часа</span> в работни дни.</p>
+
+    </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-primary w-full py-16 md:py-24 px-4 sm:px-6 md:px-12 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-[1px] bg-white/10">
+            <div class="absolute inset-0 signal-h text-[#FFC107]" style="animation-duration: 15s;"></div>
+        </div>
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 relative z-10">
+            <div class="space-y-8">
+                <div>
+                    <img src="./media/logo-footer.png" alt="Logo" class="h-24 w-auto" />
+                </div>
+                <p class="text-indigo-100/60 text-sm leading-relaxed">Надеждни електрически и умни системи за жилищни и търговски проекти. Качествена работа, трайни резултати.</p>
+                <div class="flex gap-6">
+                    <span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors" data-icon="public">public</span>
+                    <span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors" data-icon="terminal">terminal</span>
+                    <span class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors" data-icon="precision_manufacturing">precision_manufacturing</span>
+                </div>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Експертиза</h5>
+                <ul class="space-y-5 text-indigo-100/60 text-sm">
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">Електроинженерство</a></li>
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">Сигурност и CCTV</a></li>
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">IT Инфраструктура</a></li>
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">Слънчеви енергийни системи</a></li>
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">Системи за умен дом</a></li>
+                    <li><a class="hover:text-white transition-colors" href="code.html#services">Дизайн на осветление</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Ресурси</h5>
+                <ul class="space-y-5 text-indigo-100/60 text-sm">
+                    <li><a class="hover:text-white transition-colors" href="#">За нас</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Протоколи за безопасност</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Сертификати</a></li>
+                    <li><a class="hover:text-white transition-colors" href="#">Казуси</a></li>
+                </ul>
+            </div>
+            <div>
+                <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">Бюлетин</h5>
+                <p class="text-indigo-100/60 text-xs mb-6">Бъдете в крак с нашите последни новини и проекти.</p>
+                <div class="flex gap-2">
+                    <input class="bg-white border-white/10 rounded-lg px-4 py-3 text-sm text-primary w-full focus:ring-1 focus:ring-secondary focus:border-secondary" placeholder="Имейл адрес" type="email" />
+                    <button class="bg-secondary text-primary p-3 rounded-lg hover:brightness-110">
+                        <span class="material-symbols-outlined text-lg" data-icon="send">send</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto mt-10 md:mt-24 pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+            <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">© 2025 ZVB. Всички права запазени.</p>
+            <div class="flex flex-col sm:flex-row items-center gap-6">
+                <div class="flex gap-8 text-[10px] text-indigo-100/40 uppercase tracking-widest">
+                    <a class="hover:text-secondary transition-colors" href="#">Поверителност</a>
+                    <a class="hover:text-secondary transition-colors" href="#">Условия</a>
+                    <a class="hover:text-secondary transition-colors" href="#">Политика за бисквитки</a>
+                </div>
+                <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">Проектирано и разработено от <a href="https://ahdesign.website" target="_blank" class="hover:text-secondary transition-colors">AHDesign Co</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIcon = document.getElementById('menu-icon');
+        if (menuBtn && mobileMenu) {
+            menuBtn.addEventListener('click', () => {
+                const isOpen = !mobileMenu.classList.contains('hidden');
+                if (isOpen) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenu.classList.remove('flex');
+                    menuIcon.textContent = 'menu';
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                } else {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenu.classList.add('flex');
+                    mobileMenu.style.flexDirection = 'column';
+                    menuIcon.textContent = 'close';
+                    menuBtn.setAttribute('aria-expanded', 'true');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
