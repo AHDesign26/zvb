@@ -63,6 +63,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
+// Nav active link on click
+document.addEventListener('DOMContentLoaded', () => {
+    const navLinks = document.querySelectorAll('.desktop-nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.forEach(l => {
+                l.classList.remove('text-indigo-900', 'border-secondary');
+                l.classList.add('text-slate-600', 'border-transparent');
+            });
+            link.classList.remove('text-slate-600', 'border-transparent');
+            link.classList.add('text-indigo-900', 'border-secondary');
+        });
+    });
+});
+
 // Scroll Reveal
 const reveal = () => {
     const reveals = document.querySelectorAll('.reveal-on-scroll');
