@@ -63,17 +63,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Nav active link on click
+// Nav active link on click + hash detection
 document.addEventListener('DOMContentLoaded', () => {
     const navLinks = document.querySelectorAll('.desktop-nav-link');
+
+    function setActive(link) {
+        navLinks.forEach(l => {
+            l.classList.remove('text-indigo-900', 'border-secondary');
+            l.classList.add('text-slate-600', 'border-transparent');
+        });
+        link.classList.remove('text-slate-600', 'border-transparent');
+        link.classList.add('text-indigo-900', 'border-secondary');
+    }
+
+    // Highlight based on current URL hash (e.g. arriving from another page via index.html#services)
+    if (window.location.hash) {
+        const hash = window.location.hash; // e.g. "#services"
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            if (href === hash || href === 'index.html' + hash) {
+                setActive(link);
+            }
+        });
+    }
+
+    // Highlight on click
     navLinks.forEach(link => {
         link.addEventListener('click', () => {
-            navLinks.forEach(l => {
-                l.classList.remove('text-indigo-900', 'border-secondary');
-                l.classList.add('text-slate-600', 'border-transparent');
-            });
-            link.classList.remove('text-slate-600', 'border-transparent');
-            link.classList.add('text-indigo-900', 'border-secondary');
+            setActive(link);
         });
     });
 });
