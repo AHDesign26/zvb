@@ -1,0 +1,130 @@
+---
+import site from '../content/site.json';
+---
+
+<footer
+  class="bg-primary w-full pt-16 md:pt-24 pb-8 px-4 sm:px-6 md:px-12 relative overflow-hidden"
+>
+  <div class="absolute top-0 left-0 w-full h-[1px] bg-white/10">
+    <div class="absolute inset-0 signal-h text-[#FFC107]" style="animation-duration: 15s;"></div>
+  </div>
+  <div
+    class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-16 relative z-10"
+  >
+    <div class="space-y-8">
+      <div>
+        <img
+          src={site.logoFooter}
+          alt={`${site.company} logo`}
+          class="h-24 w-auto"
+          width="180"
+          height="96"
+        />
+      </div>
+      <p class="text-indigo-100/60 text-sm leading-relaxed">{site.description}</p>
+      <div class="flex gap-6">
+        <span
+          class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+          translate="no">public</span
+        >
+        <span
+          class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+          translate="no">terminal</span
+        >
+        <span
+          class="material-symbols-outlined text-white/40 cursor-pointer hover:text-secondary transition-colors"
+          translate="no">precision_manufacturing</span
+        >
+      </div>
+    </div>
+    <div>
+      <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">
+        {site.footer.expertiseTitle}
+      </h5>
+      <ul class="space-y-5 text-indigo-100/60 text-sm">
+        {
+          site.footer.expertise.map((item) => (
+            <li>
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">
+        {site.footer.resourcesTitle}
+      </h5>
+      <ul class="space-y-5 text-indigo-100/60 text-sm">
+        {
+          site.footer.resources.map((item) => (
+            <li>
+              <a class="hover:text-white transition-colors" href={item.href}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div>
+      <h5 class="text-secondary font-bold uppercase tracking-widest text-[10px] mb-8">
+        {site.footer.newsletterTitle}
+      </h5>
+      <p class="text-indigo-100/60 text-xs mb-6">{site.footer.newsletterDescription}</p>
+      <form class="flex gap-2" method="post" action="#" aria-label="Newsletter">
+        <label class="sr-only" for="newsletter-email">{site.footer.newsletterPlaceholder}</label>
+        <input
+          id="newsletter-email"
+          name="email"
+          class="bg-white border-white/10 rounded-lg px-4 py-3 text-sm text-primary w-full focus:ring-1 focus:ring-secondary focus:border-secondary"
+          placeholder={site.footer.newsletterPlaceholder}
+          type="email"
+        />
+        <button
+          type="submit"
+          class="bg-secondary text-primary p-3 rounded-lg hover:brightness-110"
+          aria-label="Subscribe"
+        >
+          <span class="material-symbols-outlined text-lg" translate="no">send</span>
+        </button>
+      </form>
+      <div class="mt-8">
+        <p class="text-indigo-100/60 text-xs mb-3">{site.footer.qrLabel}</p>
+        <img
+          src={site.qrCode}
+          alt="QR Code"
+          class="rounded-lg opacity-80 w-28 h-28 object-contain mb-8"
+          width="112"
+          height="112"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="max-w-7xl mx-auto pt-5 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 md:pr-16"
+  >
+    <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">{site.footer.copyright}</p>
+    <div class="flex flex-col sm:flex-row items-center gap-6">
+      <div class="flex gap-8 text-[10px] text-indigo-100/40 uppercase tracking-widest">
+        {
+          site.footer.legal.map((item) => (
+            <a class="hover:text-secondary transition-colors" href={item.href}>
+              {item.label}
+            </a>
+          ))
+        }
+      </div>
+      <p class="text-indigo-100/40 text-[10px] uppercase tracking-widest">
+        {site.footer.credit.text}
+        <a
+          href={site.footer.credit.linkUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-secondary transition-colors">{site.footer.credit.linkText}</a
+        >
+      </p>
+    </div>
+  </div>
+</footer>

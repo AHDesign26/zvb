@@ -1,0 +1,519 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaSection from '../components/CtaSection.astro';
+import about from '../content/pages/about.json';
+---
+
+<BaseLayout title={about.meta.title} description={about.meta.description} activeHref="/about-us">
+  <!-- Hero -->
+  <section
+    class="relative min-h-[60vh] flex items-center px-6 md:px-8 pt-28 pb-16 overflow-hidden bg-primary"
+  >
+    <div class="absolute inset-0 z-0">
+      <img
+        alt="ZVB team at work"
+        class="object-cover w-full h-full opacity-40"
+        src={about.hero.image}
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#1A237E]/30 via-[#1A237E]/15 to-transparent"
+      >
+      </div>
+    </div>
+    <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none opacity-30">
+      <div
+        class="absolute top-1/3 left-0 w-full h-[1px] bg-secondary signal-h text-[#FFC107]"
+        style="animation-duration: 10s;"
+      >
+      </div>
+      <div
+        class="absolute top-2/3 left-0 w-full h-[1px] bg-primary/30 signal-h text-white"
+        style="animation-duration: 14s; animation-delay: -4s;"
+      >
+      </div>
+      <div
+        class="absolute left-1/3 top-0 h-full w-[1px] bg-secondary signal-v text-[#FFC107]"
+        style="animation-duration: 12s; animation-delay: -2s;"
+      >
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto w-full relative z-20">
+      <div
+        class="flex items-center gap-2 text-indigo-200/60 text-xs uppercase tracking-widest font-label mb-8 reveal-on-scroll"
+      >
+        <a href="/" class="hover:text-secondary transition-colors">{about.hero.breadcrumbHome}</a>
+        <span class="material-symbols-outlined text-sm" translate="no">chevron_right</span>
+        <span class="text-secondary">{about.hero.breadcrumbCurrent}</span>
+      </div>
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-4 mb-6 reveal-on-scroll">
+          <div class="relative w-16 h-[1px] bg-secondary overflow-hidden">
+            <div class="absolute inset-0 signal-h text-[#FFC107]"></div>
+          </div>
+          <span class="text-secondary font-label font-bold tracking-widest text-xs uppercase"
+            >{about.hero.eyebrow}</span
+          >
+        </div>
+        <h1
+          class="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-8 tracking-tight reveal-on-scroll"
+          style="transition-delay: 0.1s"
+        >
+          {about.hero.titleLine1}
+          <br class="hidden sm:inline" />
+          <span class="text-secondary">{about.hero.titleLine2}</span>
+        </h1>
+        <p
+          class="text-indigo-100 text-base md:text-xl max-w-xl mb-0 leading-relaxed reveal-on-scroll"
+          style="transition-delay: 0.2s"
+        >
+          {about.hero.description}
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Description -->
+  <section class="py-20 md:py-32 bg-slate-50 relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+      <div
+        class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-secondary signal-h text-[#FFC107]"
+        style="transform: rotate(12deg); animation-duration: 22s;"
+      >
+      </div>
+      <div
+        class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-primary signal-h text-[#1A237E]"
+        style="transform: rotate(-12deg); animation-duration: 28s; animation-delay: -10s;"
+      >
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="mb-16 md:mb-24 reveal-on-scroll">
+        <span
+          class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+          >{about.description.eyebrow}</span
+        >
+        <h2
+          class="font-headline text-3xl md:text-5xl font-bold text-primary leading-snug"
+          set:html={about.description.title.replace(/\n/g, '<br />')}
+        />
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
+        <div class="reveal-on-scroll">
+          {
+            about.description.paragraphs.map((p) => (
+              <p class="text-on-surface-variant text-lg leading-relaxed mb-6 last:mb-0">{p}</p>
+            ))
+          }
+        </div>
+        <div class="relative reveal-on-scroll" style="transition-delay: 0.15s">
+          <div
+            class="relative h-[300px] sm:h-[380px] w-full overflow-hidden rounded-3xl shadow-2xl"
+          >
+            <img
+              alt={about.description.imageOne.alt}
+              class="w-full h-full object-cover"
+              src={about.description.imageOne.src}
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="absolute top-4 right-4 md:-top-6 md:-right-6 z-10 bg-secondary text-primary p-6 rounded-2xl shadow-2xl max-w-[180px]"
+          >
+            <p class="text-3xl font-headline font-bold text-primary mb-1">
+              {about.description.imageOne.metricValue}
+            </p>
+            <p class="text-xs font-label uppercase tracking-widest opacity-70 leading-snug">
+              {about.description.imageOne.metricLabel}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-20 md:mt-32"></div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-center">
+        <div class="relative reveal-on-scroll">
+          <div
+            class="relative h-[300px] sm:h-[380px] w-full overflow-hidden rounded-3xl shadow-2xl"
+          >
+            <img
+              alt={about.description.imageTwo.alt}
+              class="w-full h-full object-cover"
+              src={about.description.imageTwo.src}
+              width="800"
+              height="600"
+              loading="lazy"
+            />
+          </div>
+          <div
+            class="absolute bottom-4 left-4 md:-bottom-6 md:-left-6 z-10 bg-primary text-white p-6 rounded-2xl shadow-2xl max-w-[200px] border-b-8 border-secondary"
+          >
+            <p class="text-3xl font-headline font-bold text-secondary mb-1">
+              {about.description.imageTwo.metricValue}
+            </p>
+            <p class="text-xs font-label uppercase tracking-widest opacity-80 leading-snug">
+              {about.description.imageTwo.metricLabel}
+            </p>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 gap-8 reveal-on-scroll" style="transition-delay: 0.15s">
+          {
+            about.description.highlights.map((h) => (
+              <div class="flex gap-6">
+                <div class="flex-shrink-0 w-16 h-16 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-3xl" translate="no">
+                    {h.icon}
+                  </span>
+                </div>
+                <div>
+                  <h4 class="font-headline text-lg font-bold text-primary mb-1">{h.title}</h4>
+                  <p class="text-on-surface-variant text-sm leading-relaxed">{h.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="py-16 md:py-24 bg-primary relative overflow-hidden">
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+      <div
+        class="absolute top-0 left-1/4 h-full w-[1px] signal-v text-white"
+        style="animation-duration: 8s;"
+      >
+      </div>
+      <div
+        class="absolute top-0 right-1/4 h-full w-[1px] signal-v text-[#FFC107]"
+        style="animation-duration: 10s; animation-delay: -3s;"
+      >
+      </div>
+      <div
+        class="absolute top-1/2 left-0 w-full h-[1px] signal-h text-white"
+        style="animation-duration: 15s;"
+      >
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        {
+          about.stats.map((stat, i) => (
+            <div class="text-center reveal-on-scroll" style={`transition-delay: ${i * 0.1}s`}>
+              <p class="font-headline text-4xl md:text-5xl font-bold text-secondary mb-3">
+                {stat.value}
+              </p>
+              <p class="text-indigo-100/70 text-xs font-label uppercase tracking-widest leading-relaxed">
+                {stat.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="py-20 md:py-32 bg-background relative overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-secondary/30 signal-v text-[#FFC107]"
+    >
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-12 md:mb-24 gap-8">
+        <div class="max-w-2xl reveal-on-scroll">
+          <span
+            class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+            >{about.values.eyebrow}</span
+          >
+          <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+            {about.values.title}
+          </h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed">{about.values.description}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {
+          about.values.items.map((v, i) => (
+            <div
+              class="group relative bg-primary rounded-2xl p-8 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(26,35,126,0.35)] reveal-on-scroll"
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              <span
+                class="material-symbols-outlined absolute -top-2 -right-1 text-white/5 leading-none select-none group-hover:text-secondary/10 transition-colors duration-500"
+                style="font-size:7rem;"
+                translate="no"
+              >
+                {v.icon}
+              </span>
+              <div class="absolute bottom-0 left-0 h-[3px] w-0 bg-secondary group-hover:w-full transition-all duration-500 rounded-b-2xl" />
+              <div class="w-12 h-12 rounded-xl bg-secondary/15 flex items-center justify-center mb-6">
+                <span class="material-symbols-outlined text-secondary text-2xl" translate="no">
+                  {v.icon}
+                </span>
+              </div>
+              <h3 class="font-headline text-xl font-bold mb-4 text-white">{v.title}</h3>
+              <p class="text-indigo-200/70 text-sm leading-relaxed">{v.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Works slider -->
+  <section class="py-20 md:py-32 bg-surface relative overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-secondary/30 signal-v text-[#FFC107]"
+    >
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-6 mb-12 md:mb-16 reveal-on-scroll"
+      >
+        <div>
+          <span
+            class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-4 block"
+            >{about.works.eyebrow}</span
+          >
+          <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary">
+            {about.works.title}
+          </h2>
+        </div>
+        <div class="flex items-center gap-4">
+          <button
+            id="slider-prev"
+            type="button"
+            aria-label="Previous slide"
+            class="w-12 h-12 rounded-full border-2 border-primary flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all"
+          >
+            <span class="material-symbols-outlined text-xl" translate="no">arrow_back</span>
+          </button>
+          <button
+            id="slider-next"
+            type="button"
+            aria-label="Next slide"
+            class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white hover:bg-secondary hover:text-primary transition-all"
+          >
+            <span class="material-symbols-outlined text-xl" translate="no">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-3xl reveal-on-scroll">
+        <div class="works-slider-track" id="works-slider-track">
+          {
+            about.works.slides.map((slide) => (
+              <div class="works-slide w-full md:w-1/2 lg:w-1/3 px-3 flex-shrink-0">
+                <div
+                  class="group relative overflow-hidden rounded-2xl shadow-lg"
+                  style="height: 420px;"
+                >
+                  <img
+                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                    src={slide.image}
+                    alt={slide.title}
+                    loading="lazy"
+                    width="800"
+                    height="600"
+                  />
+                  <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors duration-500" />
+                  <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                    <span class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-3 block">
+                      {slide.category}
+                    </span>
+                    <h4 class="text-white font-headline text-2xl font-bold">{slide.title}</h4>
+                    <p class="text-indigo-200 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {slide.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+      <div class="flex justify-center gap-3 mt-10" id="slider-dots">
+        {
+          about.works.slides.map((_, i) => (
+            <button
+              type="button"
+              class:list={[
+                'slider-dot w-3 h-3 rounded-full bg-slate-300 transition-all',
+                i === 0 && 'active',
+              ]}
+              data-dot={i}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))
+        }
+      </div>
+    </div>
+    <script>
+      const track = document.getElementById('works-slider-track') as HTMLElement | null;
+      const slides = track ? Array.from(track.querySelectorAll<HTMLElement>('.works-slide')) : [];
+      const dots = Array.from(document.querySelectorAll<HTMLElement>('.slider-dot'));
+      const prevBtn = document.getElementById('slider-prev');
+      const nextBtn = document.getElementById('slider-next');
+      let current = 0;
+      let slidesPerView = 3;
+
+      function getSlidesPerView(): number {
+        if (window.innerWidth < 768) return 1;
+        if (window.innerWidth < 1024) return 2;
+        return 3;
+      }
+
+      function updateSlideWidths(): void {
+        slidesPerView = getSlidesPerView();
+        slides.forEach((s) => {
+          s.style.width = `${100 / slidesPerView}%`;
+        });
+      }
+
+      function maxIndex(): number {
+        return Math.max(0, slides.length - slidesPerView);
+      }
+
+      function goTo(index: number): void {
+        if (!track) return;
+        slidesPerView = getSlidesPerView();
+        current = Math.max(0, Math.min(index, maxIndex()));
+        const pct = (current / slides.length) * 100;
+        track.style.transform = `translateX(-${pct}%)`;
+        dots.forEach((d, i) => d.classList.toggle('active', i === current));
+      }
+
+      prevBtn?.addEventListener('click', () => goTo(current - 1));
+      nextBtn?.addEventListener('click', () => goTo(current + 1));
+      dots.forEach((d) =>
+        d.addEventListener('click', () => goTo(parseInt(d.dataset.dot ?? '0', 10))),
+      );
+
+      updateSlideWidths();
+      goTo(0);
+
+      let autoplay: ReturnType<typeof setInterval> = setInterval(
+        () => goTo(current + 1 > maxIndex() ? 0 : current + 1),
+        4000,
+      );
+      track?.addEventListener('mouseenter', () => clearInterval(autoplay));
+      track?.addEventListener('mouseleave', () => {
+        autoplay = setInterval(() => goTo(current + 1 > maxIndex() ? 0 : current + 1), 4000);
+      });
+
+      window.addEventListener('resize', () => {
+        updateSlideWidths();
+        goTo(current);
+      });
+    </script>
+  </section>
+
+  <CtaSection
+    title={about.cta.title}
+    description={about.cta.description}
+    badges={about.cta.badges}
+    callLabel={about.cta.callLabel}
+    quoteLabel={about.cta.quoteLabel}
+  />
+
+  <!-- Team -->
+  <section class="py-20 md:py-32 bg-white relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-5 pointer-events-none">
+      <div
+        class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-primary signal-h text-[#1A237E]"
+        style="transform: rotate(5deg); animation-duration: 30s;"
+      >
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+      <div class="text-center mb-12 md:mb-20 reveal-on-scroll">
+        <span
+          class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+          >{about.team.eyebrow}</span
+        >
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+          {about.team.title}
+        </h2>
+        <p class="text-on-surface-variant text-lg max-w-xl mx-auto">{about.team.description}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {
+          about.team.members.map((member, i) => (
+            <div class="flip-card h-80 reveal-on-scroll" style={`transition-delay: ${i * 0.1}s`}>
+              <div class="flip-card-inner shadow-md hover:shadow-2xl">
+                <div class="flip-card-front bg-gradient-to-br from-primary to-primary/70 flex flex-col items-center justify-end pb-6">
+                  <img
+                    src={member.photo}
+                    alt={member.name}
+                    class="absolute inset-0 w-full h-full object-cover object-top"
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                  />
+                  <div class="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-primary to-transparent" />
+                  <div class="relative z-10 text-center px-4">
+                    <h4 class="font-headline text-lg font-bold text-white drop-shadow">
+                      {member.name}
+                    </h4>
+                    <p class="text-white/70 font-label font-bold text-xs uppercase tracking-widest mt-1">
+                      {member.role}
+                    </p>
+                  </div>
+                </div>
+                <div class="flip-card-back bg-primary flex flex-col items-center justify-center p-6 text-center">
+                  <h4 class="font-headline text-lg font-bold text-white mb-2">{member.name}</h4>
+                  <p class="text-white/60 font-label font-bold text-xs uppercase tracking-widest mb-4">
+                    {member.role}
+                  </p>
+                  <p class="text-white/85 text-sm leading-relaxed mb-6">{member.bio}</p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="py-20 md:py-32 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+        <div class="reveal-on-scroll">
+          <span
+            class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+            >{about.testimonials.eyebrow}</span
+          >
+          <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-8">
+            {about.testimonials.title}
+          </h2>
+        </div>
+        <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-12">
+          {
+            about.testimonials.items.map((t, i) => (
+              <div class="reveal-on-scroll" style={`transition-delay: ${(i + 1) * 0.1}s`}>
+                <span class="material-symbols-outlined text-secondary text-3xl mb-6" translate="no">
+                  format_quote
+                </span>
+                <p class="text-on-surface-variant text-base italic mb-8">"{t.quote}"</p>
+                <div>
+                  <p class="font-bold text-primary text-lg">{t.author}</p>
+                  <p class="text-on-surface-variant text-[10px] uppercase tracking-widest">
+                    {t.role}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
