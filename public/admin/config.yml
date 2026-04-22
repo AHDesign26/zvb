@@ -12,9 +12,7 @@ backend:
   name: github
   repo: AHDesign26/zvb
   branch: main
-  # After deploying the Cloudflare Worker auth proxy, set base_url here.
-  # Example: base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
-  # base_url: https://REPLACE-WITH-YOUR-AUTH-WORKER.workers.dev
+  base_url: https://sveltia-cms-auth.hamiddarabi.workers.dev
   commit_messages:
     create: 'Create {{collection}} “{{slug}}”'
     update: 'Update {{collection}} “{{slug}}”'
