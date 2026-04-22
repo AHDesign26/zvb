@@ -48,7 +48,7 @@ collections:
           - { name: logo, label: Лого (навигация), widget: image }
           - { name: logoFooter, label: Лого (футър), widget: image }
           - { name: phone, label: Телефон (показан), widget: string }
-          - { name: phoneHref, label: Телефон (tel: връзка), widget: string }
+          - { name: phoneHref, label: "Телефон (tel: връзка)", widget: string }
           - { name: emails, label: Имейли, widget: list, field: { name: email, widget: string, label: Имейл } }
           - { name: address, label: Адрес, widget: string }
           - { name: catalogUrl, label: URL на каталога, widget: string }
