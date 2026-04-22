@@ -23,7 +23,10 @@ backend:
 # Enable for local dev: runs Sveltia against local files via the proxy server
 local_backend: true
 
-publish_mode: simple
+# editorial_workflow routes every edit through a PR so the branch
+# ruleset on main (Require PR, Require linear history) is satisfied.
+# The client clicks "Publish" in the CMS to merge the generated PR.
+publish_mode: editorial_workflow
 media_folder: public/media
 public_folder: /media
 site_url: https://zvb.bg
