@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import WireBackground from '../components/WireBackground.astro';
+import ScrollTopButton from '../components/ScrollTopButton.svelte';
+import RevealOnScroll from '../components/RevealOnScroll.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  lang?: string;
+  activeHref?: string;
+}
+
+const { title, description, lang = 'bg', activeHref } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+---
+
+<!doctype html>
+<html class="light" lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+  </head>
+  <body class="bg-background font-body text-on-surface antialiased overflow-x-hidden">
+    <WireBackground />
+    <Nav activeHref={activeHref} />
+    <main class="relative">
+      <slot />
+    </main>
+    <Footer />
+    <ScrollTopButton client:idle />
+    <RevealOnScroll />
+  </body>
+</html>

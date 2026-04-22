@@ -1,0 +1,549 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaSection from '../components/CtaSection.astro';
+import home from '../content/pages/home.json';
+import site from '../content/site.json';
+---
+
+<BaseLayout title={home.meta.title} description={home.meta.description} activeHref="/">
+  <!-- Hero -->
+  <section
+    class="relative h-screen flex items-center px-6 md:px-8 pt-24 pb-6 overflow-hidden bg-primary"
+  >
+    <div class="absolute inset-0 z-0">
+      <img
+        alt="Technical installation background"
+        class="object-cover w-full h-full opacity-50"
+        src={home.hero.image}
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+      />
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-[#1A237E]/20 via-[#1A237E]/10 to-transparent"
+      >
+      </div>
+    </div>
+    <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none opacity-40">
+      <div
+        class="absolute top-1/4 left-0 w-full h-[1px] bg-primary/30 signal-h text-white"
+        style="animation-duration: 8s;"
+      >
+      </div>
+      <div
+        class="absolute top-2/3 left-0 w-full h-[1px] bg-secondary signal-h text-[#FFC107]"
+        style="animation-duration: 12s; animation-delay: -3s;"
+      >
+      </div>
+      <div
+        class="absolute left-1/4 top-0 h-full w-[1px] bg-primary/30 signal-v text-white"
+        style="animation-duration: 10s; animation-delay: -1s;"
+      >
+      </div>
+      <div
+        class="absolute left-3/4 top-0 h-full w-[1px] bg-secondary signal-v text-[#FFC107]"
+        style="animation-duration: 15s; animation-delay: -5s;"
+      >
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto w-full relative z-20 md:pt-12">
+      <div class="flex flex-col xl:flex-row xl:justify-between xl:items-end w-full gap-12">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-4 mb-4 reveal-on-scroll">
+            <div class="relative w-16 h-[1px] bg-secondary overflow-hidden">
+              <div class="absolute inset-0 signal-h text-[#FFC107]"></div>
+            </div>
+            <span class="text-secondary font-label font-bold tracking-widest text-xs uppercase">
+              {home.hero.eyebrow}
+            </span>
+          </div>
+          <h1
+            class="font-headline text-4xl sm:text-5xl md:text-7xl font-bold text-white leading-[1.1] mb-4 tracking-tight reveal-on-scroll"
+            style="transition-delay: 0.1s"
+          >
+            {home.hero.titleLine1}
+            <br class="hidden sm:inline" />
+            <span class="text-secondary">{home.hero.titleLine2}</span>
+          </h1>
+          <p
+            class="text-indigo-100 text-base md:text-lg max-w-xl mb-4 leading-relaxed reveal-on-scroll"
+            style="transition-delay: 0.2s"
+          >
+            {home.hero.description}
+          </p>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 mb-8 md:mb-28 reveal-on-scroll"
+            style="transition-delay: 0.25s"
+          >
+            {
+              home.hero.badges.map((badge, i) => (
+                <>
+                  {i > 0 && <span class="hidden sm:block w-[1px] h-4 bg-white/30" />}
+                  <span class="inline-flex items-center gap-2 text-white text-sm font-label font-semibold">
+                    <svg
+                      class="w-4 h-4 text-secondary flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d={i === 0 ? 'M5 13l4 4L19 7' : 'M13 10V3L4 14h7v7l9-11h-7z'}
+                      />
+                    </svg>
+                    {badge}
+                  </span>
+                </>
+              ))
+            }
+          </div>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <a
+              href={home.hero.ctaPrimary.href}
+              class="text-primary bg-secondary px-8 py-4 rounded-lg font-label font-bold tracking-wide hover:shadow-xl hover:brightness-110 transition-all relative group overflow-hidden"
+            >
+              <span class="relative z-10">{home.hero.ctaPrimary.label}</span>
+            </a>
+            <a
+              href={home.hero.ctaSecondary.href}
+              class="bg-surface text-primary px-8 py-4 rounded-lg font-label font-bold tracking-wide hover:shadow-xl hover:brightness-95 transition-all"
+            >
+              {home.hero.ctaSecondary.label}
+            </a>
+          </div>
+        </div>
+        <div class="hidden md:block">
+          <div
+            class="inline-block bg-white/5 backdrop-blur-md p-6 rounded-xl border border-white/10 border-l-4 border-secondary"
+          >
+            <p class="font-label text-xs text-secondary uppercase mb-1 tracking-widest">
+              {home.hero.metric.label}
+            </p>
+            <div class="flex items-baseline gap-4">
+              <p class="font-headline text-4xl font-bold text-white">{home.hero.metric.value}</p>
+              <p class="text-indigo-200 text-sm max-w-[180px]">{home.hero.metric.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 md:py-32 px-4 sm:px-6 md:px-12 bg-background relative">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-32 bg-secondary/30 signal-v text-[#FFC107]"
+    >
+    </div>
+    <div class="max-w-7xl mx-auto">
+      <div class="flex flex-col md:flex-row justify-between items-end mb-10 md:mb-12 gap-8">
+        <div class="max-w-2xl reveal-on-scroll">
+          <span
+            class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+          >
+            {home.services.eyebrow}
+          </span>
+          <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+            {home.services.title}
+          </h2>
+          <p class="text-on-surface-variant text-lg leading-relaxed">{home.services.description}</p>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-6 gap-6 md:gap-8">
+        {
+          home.services.items.map((item, i) => (
+            <div
+              class:list={[
+                'md:col-span-2 group p-8 rounded-2xl border border-slate-100 hover-border-primary-50 transition-all shadow-md hover:shadow-2xl relative overflow-hidden reveal-on-scroll',
+                item.variant === 'accent' ? 'bg-slate-100' : 'bg-white',
+              ]}
+              style={`transition-delay: ${i * 0.1}s`}
+            >
+              <div class="absolute bottom-0 left-0 h-[3px] w-0 bg-secondary group-hover:w-full transition-all duration-500 rounded-b-2xl" />
+              <span
+                class:list={[
+                  'material-symbols-outlined mb-6 block transition-transform',
+                  item.variant === 'accent'
+                    ? 'text-secondary group-hover:translate-y-[-4px]'
+                    : 'text-primary group-hover:translate-y-[-4px]',
+                ]}
+                style="font-size: 3rem;"
+                translate="no"
+              >
+                {item.icon}
+              </span>
+              <h3 class="font-headline text-xl font-bold text-primary">{item.title}</h3>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="py-20 md:py-32 bg-slate-50 relative overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-10 pointer-events-none">
+      <div
+        class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-secondary signal-h text-[#FFC107]"
+        style="transform: rotate(15deg); animation-duration: 20s;"
+      >
+      </div>
+      <div
+        class="absolute top-1/2 left-[-50%] w-[200%] h-[1px] bg-primary signal-h text-[#1A237E]"
+        style="transform: rotate(-15deg); animation-duration: 25s; animation-delay: -10s;"
+      >
+      </div>
+    </div>
+    <div
+      class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-stretch relative z-10"
+    >
+      <div class="reveal-on-scroll">
+        <span
+          class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-6 block"
+        >
+          {home.about.eyebrow}
+        </span>
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-10 leading-snug">
+          {home.about.title}
+        </h2>
+        <div class="grid grid-cols-1 gap-6">
+          {
+            home.about.points.map((point) => (
+              <div class="flex items-start gap-5 group">
+                <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-white shadow-md border border-slate-100 flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-2xl" translate="no">
+                    {point.icon}
+                  </span>
+                </div>
+                <div class="flex flex-col justify-center">
+                  <p class="text-primary font-headline text-lg font-bold leading-snug">
+                    {point.title}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="mt-8" style="margin-top:3rem;">
+          <a
+            href={site.catalogUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-primary text-secondary font-bold inline-flex items-center gap-3 hover:gap-5 transition-all text-[10px] uppercase tracking-widest px-6 py-3 rounded-xl hover:bg-primary/90"
+          >
+            {home.about.catalogLabel}
+            <span class="material-symbols-outlined text-lg" translate="no">menu_book</span>
+          </a>
+        </div>
+      </div>
+      <div class="relative reveal-on-scroll" style="transition-delay: 0.15s">
+        <div
+          class="relative h-[320px] sm:h-[420px] md:h-[560px] w-full overflow-hidden rounded-3xl shadow-2xl"
+        >
+          <img
+            alt="Professional Electrical Work"
+            class="w-full h-full object-cover transition-all duration-1000"
+            src={home.about.image}
+            width="800"
+            height="600"
+            loading="lazy"
+          />
+        </div>
+        <div
+          class="absolute bottom-4 left-4 md:-bottom-6 md:-left-6 z-10 bg-primary text-white p-6 md:p-8 rounded-2xl shadow-2xl max-w-[200px] md:max-w-[240px] border-b-8 border-secondary"
+        >
+          <p class="text-3xl font-headline font-bold text-secondary mb-2">
+            {home.about.metric.value}
+          </p>
+          <p class="text-xs font-label uppercase tracking-widest opacity-80 leading-snug">
+            {home.about.metric.description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20 md:py-32 bg-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+      <div class="text-center mb-10 md:mb-24 reveal-on-scroll">
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+          {home.process.title}
+        </h2>
+        <p class="text-on-surface-variant text-lg max-w-xl mx-auto">{home.process.description}</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-5 gap-8 relative" id="process-steps">
+        <div class="absolute top-10 left-0 w-full h-[2px] bg-slate-100 hidden md:block">
+          <div
+            id="process-line-fill"
+            class="absolute left-0 top-0 h-full bg-secondary"
+            style="width: 0%; transition: width 0.4s cubic-bezier(0.4,0,0.2,1);"
+          >
+          </div>
+        </div>
+        {
+          home.process.steps.map((step, i) => (
+            <div
+              class="relative group reveal-on-scroll text-left"
+              style={`transition-delay: ${i * 0.1}s`}
+              data-step={i + 1}
+            >
+              <div class="w-16 h-16 rounded-2xl bg-white border-2 border-slate-100 flex items-center justify-center font-headline text-2xl font-bold text-primary mb-10 relative z-10 group-hover:bg-primary group-hover:text-secondary transition-all shadow-xl">
+                {step.number}
+              </div>
+              <h4 class="font-headline text-xl font-bold text-primary mb-4">{step.title}</h4>
+              <p class="text-on-surface-variant text-sm leading-relaxed">{step.description}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+    <script>
+      const fill = document.getElementById('process-line-fill');
+      const steps = document.querySelectorAll<HTMLElement>('#process-steps [data-step]');
+      steps.forEach((step) => {
+        step.addEventListener('mouseenter', () => {
+          if (!fill) return;
+          const stepNum = parseInt(step.dataset.step ?? '0', 10);
+          if (stepNum === 1) {
+            fill.style.width = '0%';
+            return;
+          }
+          const icon = step.querySelector('div');
+          const track = fill.parentElement;
+          if (!icon || !track) return;
+          const trackRect = track.getBoundingClientRect();
+          const iconRect = icon.getBoundingClientRect();
+          const iconCenter = iconRect.left + iconRect.width / 2;
+          const pct = ((iconCenter - trackRect.left) / trackRect.width) * 100;
+          fill.style.width = `${pct}%`;
+        });
+        step.addEventListener('mouseleave', () => {
+          if (fill) fill.style.width = '0%';
+        });
+      });
+    </script>
+  </section>
+
+  <CtaSection
+    title={home.cta.title}
+    description={home.cta.description}
+    badges={home.cta.badges}
+    callLabel={home.cta.callLabel}
+    quoteLabel={home.cta.quoteLabel}
+  />
+
+  <!-- Installations -->
+  <section id="projects" class="py-20 md:py-32 bg-surface relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 relative">
+      <div
+        class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 md:mb-16 reveal-on-scroll"
+      >
+        <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary">
+          {home.installations.title}
+        </h2>
+        <a
+          href="/gallery"
+          class="text-primary font-bold border-b-2 border-secondary pb-1 flex items-center gap-3 hover:gap-5 transition-all text-[10px] uppercase tracking-widest shrink-0"
+        >
+          {home.installations.seeMoreLabel}
+          <span class="material-symbols-outlined text-lg" translate="no">north_east</span>
+        </a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {
+          home.installations.items.map((item, i) => {
+            const isLarge = item.size === 'large';
+            const colSpan = isLarge ? 'md:col-span-2' : 'md:col-span-1';
+            const height = isLarge ? '360px' : '280px';
+            return (
+              <div
+                class:list={[
+                  colSpan,
+                  'group relative overflow-hidden rounded-3xl reveal-on-scroll',
+                ]}
+                style={`height:${height}; transition-delay:${i * 0.1}s;`}
+              >
+                <img
+                  class="w-full h-full object-cover transition-all duration-1000 group-hover:scale-110"
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  width="800"
+                  height="600"
+                />
+                <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/20 transition-colors duration-500" />
+                <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                  <span class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-2 block">
+                    {item.category}
+                  </span>
+                  <h4
+                    class:list={[
+                      'text-white font-headline font-bold',
+                      isLarge ? 'text-xl' : 'text-lg',
+                    ]}
+                  >
+                    {item.title}
+                  </h4>
+                </div>
+              </div>
+            );
+          })
+        }
+      </div>
+      <div class="mt-10 reveal-on-scroll">
+        <a
+          href={site.catalogUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-primary font-bold border-b-2 border-secondary pb-1 inline-flex items-center gap-3 hover:gap-5 transition-all text-[10px] uppercase tracking-widest"
+        >
+          {home.installations.catalogLabel}
+          <span class="material-symbols-outlined text-lg" translate="no">menu_book</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 md:py-32 bg-white relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 items-start">
+        <div class="reveal-on-scroll">
+          <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+            {home.contact.title}
+          </h2>
+          <p class="text-on-surface-variant text-lg mb-6">{home.contact.description}</p>
+          <div
+            class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-6 mb-8 md:mb-16"
+          >
+            {
+              home.contact.badges.map((badge, i) => (
+                <>
+                  {i > 0 && <span class="hidden sm:block w-[1px] h-4 bg-slate-300" />}
+                  <span class="inline-flex items-center gap-2 font-label font-semibold">
+                    <svg
+                      style="width: 1rem; height: 1rem; flex-shrink: 0; color: #FFC107;"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d={i === 0 ? 'M5 13l4 4L19 7' : 'M13 10V3L4 14h7v7l9-11h-7z'}
+                      />
+                    </svg>
+                    <span style="text-decoration:underline;text-decoration-color:#FFC107;text-underline-offset:4px;text-decoration-thickness:2px;font-size:1.125rem;color:#1A237E;">
+                      {badge}
+                    </span>
+                  </span>
+                </>
+              ))
+            }
+          </div>
+          <div class="space-y-8 md:space-y-12">
+            {
+              home.contact.channels.map((channel) => (
+                <div class="flex gap-8 group">
+                  <div class="contact-icon-bg w-14 h-14 rounded-full border border-slate-100 flex items-center justify-center text-secondary transition-colors">
+                    <span class="material-symbols-outlined text-2xl" translate="no">
+                      {channel.icon}
+                    </span>
+                  </div>
+                  <div>
+                    <h5 class="font-bold text-primary text-lg mb-2">{channel.label}</h5>
+                    <p class="text-on-surface-variant text-sm leading-relaxed">{channel.value}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div
+          class="bg-slate-50 p-6 sm:p-10 md:p-16 rounded-3xl relative reveal-on-scroll"
+          style="transition-delay: 0.2s"
+        >
+          <div
+            class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-4 border-r-4 border-secondary/20 rounded-tr-xl"
+          >
+          </div>
+          <form class="space-y-10" method="post" action="#">
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="home-name"
+              >
+                {home.contact.form.nameLabel}
+              </label>
+              <input
+                id="home-name"
+                name="name"
+                class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={home.contact.form.namePlaceholder}
+                type="text"
+                required
+              />
+            </div>
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="home-email"
+              >
+                {home.contact.form.emailLabel}
+              </label>
+              <input
+                id="home-email"
+                name="email"
+                class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={home.contact.form.emailPlaceholder}
+                type="email"
+                required
+              />
+            </div>
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="home-interest"
+              >
+                {home.contact.form.interestLabel}
+              </label>
+              <select
+                id="home-interest"
+                name="interest"
+                class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary shadow-sm"
+              >
+                {home.contact.form.interestOptions.map((opt) => <option value={opt}>{opt}</option>)}
+              </select>
+            </div>
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="home-message"
+              >
+                {home.contact.form.messageLabel}
+              </label>
+              <textarea
+                id="home-message"
+                name="message"
+                class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={home.contact.form.messagePlaceholder}
+                rows="4"></textarea>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl"
+            >
+              <span class="relative z-10">{home.contact.form.submitLabel}</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

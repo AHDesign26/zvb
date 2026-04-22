@@ -1,0 +1,169 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import request from '../content/pages/request.json';
+
+const footerNoteParts = request.footerNote.split(request.footerNoteHighlight);
+---
+
+<BaseLayout
+  title={request.meta.title}
+  description={request.meta.description}
+  activeHref="/request-form"
+>
+  <div class="flex-1 flex items-center justify-center pt-36 pb-16 px-4 sm:px-6 md:px-12">
+    <div class="w-full max-w-4xl">
+      <div class="mb-10 text-center reveal-on-scroll">
+        <span
+          class="font-label font-bold tracking-widest uppercase block mb-3"
+          style="font-size: 0.75rem; color: var(--color-on-surface-variant-50);"
+        >
+          {request.eyebrow}
+        </span>
+        <h1 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-4">
+          {request.title}
+        </h1>
+        <p class="text-on-surface-variant text-base">{request.description}</p>
+      </div>
+
+      <div
+        class="bg-slate-50 p-6 sm:p-10 md:p-14 rounded-3xl relative reveal-on-scroll"
+        style="transition-delay: 0.15s"
+      >
+        <div
+          class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-4 border-r-4 rounded-tr-xl"
+          style="border-color: var(--color-secondary-alpha);"
+        >
+        </div>
+        <div
+          class="hidden sm:block absolute bottom-6 left-6 w-12 h-12 border-b-4 border-l-4 rounded-bl-xl"
+          style="border-color: var(--color-primary-50);"
+        >
+        </div>
+
+        <form class="space-y-8" method="post" action="#">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="req-name"
+              >
+                {request.form.nameLabel}
+              </label>
+              <input
+                id="req-name"
+                name="name"
+                class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={request.form.namePlaceholder}
+                type="text"
+                required
+              />
+            </div>
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="req-company"
+              >
+                {request.form.companyLabel}
+              </label>
+              <input
+                id="req-company"
+                name="company"
+                class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={request.form.companyPlaceholder}
+                type="text"
+              />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="req-email"
+              >
+                {request.form.emailLabel}
+              </label>
+              <input
+                id="req-email"
+                name="email"
+                class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={request.form.emailPlaceholder}
+                type="email"
+                required
+              />
+            </div>
+            <div class="space-y-3">
+              <label
+                class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+                for="req-phone"
+              >
+                {request.form.phoneLabel}
+              </label>
+              <input
+                id="req-phone"
+                name="phone"
+                class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+                placeholder={request.form.phonePlaceholder}
+                type="tel"
+              />
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <label
+              class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+              for="req-type"
+            >
+              {request.form.projectTypeLabel}
+            </label>
+            <select
+              id="req-type"
+              name="projectType"
+              class="w-full bg-white rounded-xl border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary shadow-sm"
+              required
+            >
+              <option value="" disabled selected>{request.form.projectTypePlaceholder}</option>
+              {request.form.projectTypes.map((opt) => <option value={opt}>{opt}</option>)}
+            </select>
+          </div>
+
+          <div class="space-y-3">
+            <label
+              class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
+              for="req-details"
+            >
+              {request.form.detailsLabel}
+            </label>
+            <textarea
+              id="req-details"
+              name="details"
+              class="w-full bg-white rounded-xl border border-slate-200 focus:ring-2 focus:ring-secondary focus:border-secondary transition-all px-6 py-4 text-primary placeholder-slate-400 shadow-sm"
+              placeholder={request.form.detailsPlaceholder}
+              rows="5"></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl"
+          >
+            <span class="relative z-10 flex items-center justify-center gap-3">
+              {request.form.submitLabel}
+              <span
+                class="material-symbols-outlined text-lg"
+                style="font-variation-settings: 'FILL' 0, 'wght' 200, 'GRAD' 0, 'opsz' 24;"
+                translate="no"
+              >
+                arrow_forward
+              </span>
+            </span>
+          </button>
+        </form>
+      </div>
+
+      <p class="text-center text-on-surface-variant text-xs mt-8">
+        {footerNoteParts[0]}<span class="font-bold text-primary">{request.footerNoteHighlight}</span
+        >{footerNoteParts[1]}
+      </p>
+    </div>
+  </div>
+</BaseLayout>

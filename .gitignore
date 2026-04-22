@@ -1,0 +1,32 @@
+# Astro
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Tooling caches
+.eslintcache
+.cache/
+
+# Claude
+.claude/

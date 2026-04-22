@@ -1,0 +1,22 @@
+{
+  "meta": {
+    "title": "ZVB | Галерия",
+    "description": "Разгледайте реализираните ни проекти — от електрически инсталации до умни системи и осветление."
+  },
+  "hero": {
+    "eyebrow": "Нашата работа",
+    "title": "Галерия",
+    "description": "Разгледайте реализираните ни проекти — от електрически инсталации до умни системи и осветление.",
+    "image": "/media/hero2.png"
+  },
+  "filters": [
+    { "key": "all", "label": "Всички", "icon": "apps" },
+    { "key": "electrical", "label": "Електроинженерство", "icon": "electric_bolt" },
+    { "key": "cctv", "label": "Сигурност и CCTV", "icon": "videocam" },
+    { "key": "it", "label": "IT Инфраструктура", "icon": "lan" },
+    { "key": "solar", "label": "Слънчеви системи", "icon": "solar_power" },
+    { "key": "smarthome", "label": "Умен дом", "icon": "hub" },
+    { "key": "lighting", "label": "Осветление", "icon": "lightbulb" }
+  ],
+  "emptyStateText": "Няма намерени снимки в тази категория."
+}

@@ -1,0 +1,458 @@
+# Sveltia CMS configuration for zvb.bg
+# Docs: https://sveltiacms.app/
+#
+# Deployment notes:
+# 1. Set `backend.repo` to `<github-user>/<repo-name>` after the repo is renamed/forked.
+# 2. Deploy the Sveltia OAuth worker from https://github.com/sveltia/sveltia-cms-auth
+#    to Cloudflare Workers, then set `backend.base_url` to that worker URL.
+# 3. For local development, run `pnpm dev` and the admin is available at /admin/ with
+#    `local_backend: true` enabled below (uses `npx @sveltia/cms-proxy-server` bridge).
+
+backend:
+  name: github
+  repo: AHDesign26/zvb
+  branch: main
+  # After deploying the Cloudflare Worker auth proxy, set base_url here.
+  # Example: base_url: https://sveltia-cms-auth.<your-subdomain>.workers.dev
+  # base_url: https://REPLACE-WITH-YOUR-AUTH-WORKER.workers.dev
+  commit_messages:
+    create: 'Create {{collection}} “{{slug}}”'
+    update: 'Update {{collection}} “{{slug}}”'
+    delete: 'Delete {{collection}} “{{slug}}”'
+    uploadMedia: 'Upload “{{path}}”'
+    deleteMedia: 'Delete “{{path}}”'
+
+# Enable for local dev: runs Sveltia against local files via the proxy server
+local_backend: true
+
+publish_mode: simple
+media_folder: public/media
+public_folder: /media
+site_url: https://zvb.bg
+display_url: https://zvb.bg
+logo_url: /media/logo.png
+
+collections:
+  # ───────── Singletons (one file per page) ─────────
+  - name: site
+    label: Настройки на сайта
+    label_singular: Настройки
+    description: Глобални настройки — навигация, футър, контактни данни.
+    files:
+      - name: site
+        label: Сайт
+        file: src/content/site.json
+        format: json
+        fields:
+          - { name: company, label: Име на компанията, widget: string }
+          - { name: tagline, label: Слоган, widget: string }
+          - { name: description, label: Кратко описание, widget: text }
+          - { name: logo, label: Лого (навигация), widget: image }
+          - { name: logoFooter, label: Лого (футър), widget: image }
+          - { name: phone, label: Телефон (показан), widget: string }
+          - { name: phoneHref, label: Телефон (tel: връзка), widget: string }
+          - { name: emails, label: Имейли, widget: list, field: { name: email, widget: string, label: Имейл } }
+          - { name: address, label: Адрес, widget: string }
+          - { name: catalogUrl, label: URL на каталога, widget: string }
+          - { name: qrCode, label: QR код изображение, widget: image }
+          - name: ctaLabel
+            label: CTA текст (бутон "Заявете оферта")
+            widget: string
+          - { name: ctaHref, label: CTA връзка, widget: string }
+          - name: nav
+            label: Навигация
+            widget: list
+            fields:
+              - { name: label, label: Текст, widget: string }
+              - { name: href, label: Връзка, widget: string }
+          - name: footer
+            label: Футър
+            widget: object
+            fields:
+              - { name: expertiseTitle, label: Заглавие "Експертиза", widget: string }
+              - { name: expertise, label: Списък експертиза, widget: list, field: { name: item, widget: string, label: Услуга } }
+              - { name: resourcesTitle, label: Заглавие "Ресурси", widget: string }
+              - name: resources
+                label: Ресурси
+                widget: list
+                fields:
+                  - { name: label, label: Текст, widget: string }
+                  - { name: href, label: Връзка, widget: string }
+              - { name: newsletterTitle, label: Заглавие бюлетин, widget: string }
+              - { name: newsletterDescription, label: Описание бюлетин, widget: text }
+              - { name: newsletterPlaceholder, label: Placeholder имейл, widget: string }
+              - { name: qrLabel, label: Текст до QR кода, widget: string }
+              - { name: copyright, label: Copyright, widget: string }
+              - name: legal
+                label: Правни връзки
+                widget: list
+                fields:
+                  - { name: label, label: Текст, widget: string }
+                  - { name: href, label: Връзка, widget: string }
+              - name: credit
+                label: Кредит за разработчик
+                widget: object
+                fields:
+                  - { name: text, label: Текст преди линка, widget: string }
+                  - { name: linkText, label: Текст на линка, widget: string }
+                  - { name: linkUrl, label: URL, widget: string }
+
+  - name: pages
+    label: Страници
+    label_singular: Страница
+    description: Съдържание на страниците (Начало, За нас, Галерия, Заявка).
+    files:
+      - name: home
+        label: Начална страница
+        file: src/content/pages/home.json
+        format: json
+        fields:
+          - name: meta
+            label: Meta
+            widget: object
+            fields:
+              - { name: title, label: Browser title, widget: string }
+              - { name: description, label: Meta description, widget: text }
+          - name: hero
+            label: Hero секция
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: titleLine1, label: Заглавие (ред 1), widget: string }
+              - { name: titleLine2, label: Заглавие (ред 2 — акцент), widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: image, label: Фоново изображение, widget: image }
+              - { name: badges, label: Бадж текстове, widget: list, field: { name: badge, widget: string, label: Бадж } }
+              - name: ctaPrimary
+                label: Основен CTA
+                widget: object
+                fields:
+                  - { name: label, label: Текст, widget: string }
+                  - { name: href, label: Връзка, widget: string }
+              - name: ctaSecondary
+                label: Втори CTA
+                widget: object
+                fields:
+                  - { name: label, label: Текст, widget: string }
+                  - { name: href, label: Връзка, widget: string }
+              - name: metric
+                label: Метрика
+                widget: object
+                fields:
+                  - { name: label, label: Етикет, widget: string }
+                  - { name: value, label: Стойност, widget: string }
+                  - { name: description, label: Описание, widget: string }
+          - name: services
+            label: Секция "Услуги"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - name: items
+                label: Услуги (карти)
+                widget: list
+                fields:
+                  - { name: icon, label: Material icon име, widget: string, hint: "Например: electric_bolt, videocam, lan" }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: variant, label: Вариант, widget: select, options: ["default", "accent"], default: "default" }
+          - name: about
+            label: Секция "За нас"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - name: points
+                label: Точки
+                widget: list
+                fields:
+                  - { name: icon, label: Material icon, widget: string }
+                  - { name: title, label: Текст, widget: string }
+              - { name: catalogLabel, label: Текст на бутона каталог, widget: string }
+              - { name: image, label: Изображение, widget: image }
+              - name: metric
+                label: Метрика
+                widget: object
+                fields:
+                  - { name: value, label: Стойност, widget: string }
+                  - { name: description, label: Описание, widget: string }
+          - name: process
+            label: Секция "Процес"
+            widget: object
+            fields:
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - name: steps
+                label: Стъпки
+                widget: list
+                fields:
+                  - { name: number, label: Номер, widget: string }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: description, label: Описание, widget: text }
+          - name: cta
+            label: CTA секция
+            widget: object
+            fields:
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: badges, label: Баджове, widget: list, field: { name: badge, widget: string, label: Бадж } }
+              - { name: callLabel, label: "Бутон: Обадете се", widget: string }
+              - { name: quoteLabel, label: "Бутон: Заявете оферта", widget: string }
+          - name: installations
+            label: Секция "Инсталации"
+            widget: object
+            fields:
+              - { name: title, label: Заглавие, widget: string }
+              - { name: seeMoreLabel, label: Текст "Вижте повече", widget: string }
+              - name: items
+                label: Карти
+                widget: list
+                fields:
+                  - { name: category, label: Категория, widget: string }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: image, label: Изображение, widget: image }
+                  - { name: size, label: Размер, widget: select, options: ["large", "small"], default: "small" }
+              - { name: catalogLabel, label: Текст каталог, widget: string }
+          - name: contact
+            label: Секция "Контакт"
+            widget: object
+            fields:
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: badges, label: Баджове, widget: list, field: { name: badge, widget: string, label: Бадж } }
+              - name: channels
+                label: Канали
+                widget: list
+                fields:
+                  - { name: icon, label: Material icon, widget: string }
+                  - { name: label, label: Етикет, widget: string }
+                  - { name: value, label: Стойност, widget: string }
+              - name: form
+                label: Полета на формата
+                widget: object
+                fields:
+                  - { name: nameLabel, label: "Етикет: Име", widget: string }
+                  - { name: namePlaceholder, label: "Placeholder: Име", widget: string }
+                  - { name: emailLabel, label: "Етикет: Имейл", widget: string }
+                  - { name: emailPlaceholder, label: "Placeholder: Имейл", widget: string }
+                  - { name: interestLabel, label: "Етикет: Интерес", widget: string }
+                  - { name: interestOptions, label: "Опции услуги", widget: list, field: { name: option, widget: string, label: Опция } }
+                  - { name: messageLabel, label: "Етикет: Съобщение", widget: string }
+                  - { name: messagePlaceholder, label: "Placeholder: Съобщение", widget: string }
+                  - { name: submitLabel, label: "Текст бутон", widget: string }
+
+      - name: about
+        label: Страница "За нас"
+        file: src/content/pages/about.json
+        format: json
+        fields:
+          - name: meta
+            label: Meta
+            widget: object
+            fields:
+              - { name: title, label: Browser title, widget: string }
+              - { name: description, label: Meta description, widget: text }
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: breadcrumbHome, label: Breadcrumb начало, widget: string }
+              - { name: breadcrumbCurrent, label: Breadcrumb текущ, widget: string }
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: titleLine1, label: Заглавие (ред 1), widget: string }
+              - { name: titleLine2, label: Заглавие (ред 2), widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: image, label: Фоново изображение, widget: image }
+          - name: description
+            label: Секция "Описание"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие (\\n за нов ред), widget: text }
+              - { name: paragraphs, label: Параграфи, widget: list, field: { name: p, label: Параграф, widget: text } }
+              - name: imageOne
+                label: Първо изображение
+                widget: object
+                fields:
+                  - { name: src, label: Изображение, widget: image }
+                  - { name: alt, label: Alt текст, widget: string }
+                  - { name: metricValue, label: Метрика стойност, widget: string }
+                  - { name: metricLabel, label: Метрика етикет, widget: string }
+              - name: imageTwo
+                label: Второ изображение
+                widget: object
+                fields:
+                  - { name: src, label: Изображение, widget: image }
+                  - { name: alt, label: Alt текст, widget: string }
+                  - { name: metricValue, label: Метрика стойност, widget: string }
+                  - { name: metricLabel, label: Метрика етикет, widget: string }
+              - name: highlights
+                label: Ключови точки
+                widget: list
+                fields:
+                  - { name: icon, label: Material icon, widget: string }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: description, label: Описание, widget: text }
+          - name: stats
+            label: Статистики
+            widget: list
+            fields:
+              - { name: value, label: Стойност, widget: string }
+              - { name: label, label: Етикет, widget: string }
+          - name: values
+            label: Секция "Ценности"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - name: items
+                label: Ценности
+                widget: list
+                fields:
+                  - { name: icon, label: Material icon, widget: string }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: description, label: Описание, widget: text }
+          - name: works
+            label: Секция "Реализации"
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - name: slides
+                label: Слайдове
+                widget: list
+                fields:
+                  - { name: category, label: Категория, widget: string }
+                  - { name: title, label: Заглавие, widget: string }
+                  - { name: description, label: Описание, widget: text }
+                  - { name: image, label: Изображение, widget: image }
+          - name: cta
+            label: CTA
+            widget: object
+            fields:
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: badges, label: Баджове, widget: list, field: { name: badge, widget: string, label: Бадж } }
+              - { name: callLabel, label: "Бутон: Обадете се", widget: string }
+              - { name: quoteLabel, label: "Бутон: Заявете", widget: string }
+          - name: team
+            label: Екип
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - name: members
+                label: Членове
+                widget: list
+                fields:
+                  - { name: name, label: Име, widget: string }
+                  - { name: role, label: Роля, widget: string }
+                  - { name: photo, label: Снимка, widget: image }
+                  - { name: bio, label: Био, widget: text }
+          - name: testimonials
+            label: Отзиви
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - name: items
+                label: Отзиви
+                widget: list
+                fields:
+                  - { name: quote, label: Цитат, widget: text }
+                  - { name: author, label: Автор, widget: string }
+                  - { name: role, label: Роля, widget: string }
+
+      - name: gallery
+        label: Страница "Галерия"
+        file: src/content/pages/gallery.json
+        format: json
+        fields:
+          - name: meta
+            label: Meta
+            widget: object
+            fields:
+              - { name: title, label: Browser title, widget: string }
+              - { name: description, label: Meta description, widget: text }
+          - name: hero
+            label: Hero
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Заглавие, widget: string }
+              - { name: description, label: Описание, widget: text }
+              - { name: image, label: Фоново изображение, widget: image }
+          - name: filters
+            label: Филтри
+            widget: list
+            fields:
+              - { name: key, label: Ключ, widget: string, hint: "Съвпада с категорията на проектите" }
+              - { name: label, label: Текст, widget: string }
+              - { name: icon, label: Material icon, widget: string }
+          - { name: emptyStateText, label: Текст при празна категория, widget: string }
+
+      - name: request
+        label: Страница "Заявка"
+        file: src/content/pages/request.json
+        format: json
+        fields:
+          - name: meta
+            label: Meta
+            widget: object
+            fields:
+              - { name: title, label: Browser title, widget: string }
+              - { name: description, label: Meta description, widget: text }
+          - { name: eyebrow, label: Eyebrow, widget: string }
+          - { name: title, label: Заглавие, widget: string }
+          - { name: description, label: Описание, widget: text }
+          - name: form
+            label: Полета на формата
+            widget: object
+            fields:
+              - { name: nameLabel, label: "Етикет: Име", widget: string }
+              - { name: namePlaceholder, label: "Placeholder: Име", widget: string }
+              - { name: companyLabel, label: "Етикет: Фирма", widget: string }
+              - { name: companyPlaceholder, label: "Placeholder: Фирма", widget: string }
+              - { name: emailLabel, label: "Етикет: Имейл", widget: string }
+              - { name: emailPlaceholder, label: "Placeholder: Имейл", widget: string }
+              - { name: phoneLabel, label: "Етикет: Телефон", widget: string }
+              - { name: phonePlaceholder, label: "Placeholder: Телефон", widget: string }
+              - { name: projectTypeLabel, label: "Етикет: Тип проект", widget: string }
+              - { name: projectTypePlaceholder, label: "Placeholder: Тип проект", widget: string }
+              - { name: projectTypes, label: "Типове проекти", widget: list, field: { name: opt, widget: string, label: Опция } }
+              - { name: detailsLabel, label: "Етикет: Детайли", widget: string }
+              - { name: detailsPlaceholder, label: "Placeholder: Детайли", widget: string }
+              - { name: submitLabel, label: "Бутон Изпратете", widget: string }
+          - { name: footerNote, label: Бележка под формата, widget: string }
+          - { name: footerNoteHighlight, label: Осветена част, widget: string }
+
+  # ───────── Projects collection (gallery items) ─────────
+  - name: projects
+    label: Проекти (галерия)
+    label_singular: Проект
+    folder: src/content/projects
+    format: json
+    extension: json
+    identifier_field: title
+    create: true
+    delete: true
+    slug: '{{order}}-{{slug}}'
+    summary: '{{order}}. {{title}} — {{categoryLabel}}'
+    sortable_fields: [order, title, category]
+    fields:
+      - { name: title, label: Заглавие, widget: string }
+      - name: category
+        label: Категория (ключ)
+        widget: select
+        options:
+          - { label: Електроинженерство, value: electrical }
+          - { label: Сигурност и CCTV, value: cctv }
+          - { label: IT Инфраструктура, value: it }
+          - { label: Слънчеви системи, value: solar }
+          - { label: Умен дом, value: smarthome }
+          - { label: Осветление, value: lighting }
+      - { name: categoryLabel, label: Категория (показва се), widget: string }
+      - { name: image, label: Изображение, widget: image }
+      - { name: order, label: Подредба, widget: number, value_type: int, default: 0, min: 0 }

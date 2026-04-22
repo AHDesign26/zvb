@@ -1,0 +1,54 @@
+{
+  "company": "ZVB",
+  "tagline": "Електрически и умни системи",
+  "description": "Надеждни електрически и умни системи за жилищни и търговски проекти. Качествена работа, трайни резултати.",
+  "logo": "/media/logo.png",
+  "logoFooter": "/media/logo-footer.png",
+  "phone": "+359 87 7944353",
+  "phoneHref": "tel:+35987794353",
+  "emails": ["contact@zvb.bg", "info@zvb.bg"],
+  "address": "Sofia, Bulgaria",
+  "catalogUrl": "https://drive.google.com/file/d/1nNibL4nquyNCa-Q6yTaYaT1O5ADP7W-f/view?usp=drivesdk",
+  "qrCode": "/media/qr-code.jpg",
+  "nav": [
+    { "label": "За нас", "href": "/about-us" },
+    { "label": "Услуги", "href": "/#services" },
+    { "label": "Проекти", "href": "/gallery" },
+    { "label": "Контакт", "href": "/#contact" }
+  ],
+  "ctaLabel": "Заявете оферта",
+  "ctaHref": "/request-form",
+  "footer": {
+    "expertiseTitle": "Експертиза",
+    "expertise": [
+      "Електроинженерство",
+      "Сигурност и CCTV",
+      "IT Инфраструктура",
+      "Слънчеви енергийни системи",
+      "Системи за умен дом",
+      "Дизайн на осветление"
+    ],
+    "resourcesTitle": "Ресурси",
+    "resources": [
+      { "label": "За нас", "href": "/about-us" },
+      { "label": "Услуги", "href": "/#services" },
+      { "label": "Проекти", "href": "/gallery" },
+      { "label": "Контакт", "href": "/#contact" }
+    ],
+    "newsletterTitle": "Бюлетин",
+    "newsletterDescription": "Бъдете в крак с нашите последни новини и проекти.",
+    "newsletterPlaceholder": "Имейл адрес",
+    "qrLabel": "Сканирайте за бърза връзка",
+    "copyright": "© 2025 ZVB. All rights reserved.",
+    "legal": [
+      { "label": "Поверителност", "href": "#" },
+      { "label": "Условия", "href": "#" },
+      { "label": "Политика за бисквитки", "href": "#" }
+    ],
+    "credit": {
+      "text": "Проектирано и разработено от",
+      "linkText": "AHDesign Co",
+      "linkUrl": "https://ahdesign.website"
+    }
+  }
+}
