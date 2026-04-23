@@ -40,7 +40,15 @@ const footerNoteParts = request.footerNote.split(request.footerNoteHighlight);
         >
         </div>
 
-        <form class="space-y-8" method="post" action="#">
+        <form id="request-form" class="space-y-8" method="post" action="#" novalidate>
+          <!-- Honeypot: real users can't see it; bots fill it and we drop the submission -->
+          <div
+            aria-hidden="true"
+            style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"
+          >
+            <label for="req-website">Website (do not fill)</label>
+            <input id="req-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div class="space-y-3">
               <label
@@ -142,9 +150,10 @@ const footerNoteParts = request.footerNote.split(request.footerNoteHighlight);
               rows="5"></textarea>
           </div>
 
+          <div id="request-turnstile"></div>
           <button
             type="submit"
-            class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl"
+            class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
           >
             <span class="relative z-10 flex items-center justify-center gap-3">
               {request.form.submitLabel}
@@ -157,6 +166,8 @@ const footerNoteParts = request.footerNote.split(request.footerNoteHighlight);
               </span>
             </span>
           </button>
+          <p id="request-status" role="status" aria-live="polite" class="mt-6 text-sm text-center">
+          </p>
         </form>
       </div>
 
@@ -166,4 +177,24 @@ const footerNoteParts = request.footerNote.split(request.footerNoteHighlight);
       </p>
     </div>
   </div>
+
+  <script>
+    import { initContactForm } from '../scripts/contactForm';
+    import requestContent from '../content/pages/request.json';
+
+    const f = requestContent.form;
+    void initContactForm({
+      formId: 'request-form',
+      statusId: 'request-status',
+      turnstileContainerId: 'request-turnstile',
+      type: 'request',
+      messages: {
+        success: f.statusSuccess,
+        error: f.statusError,
+        captcha: f.statusCaptcha,
+        rateLimited: f.statusRateLimited,
+        validation: f.statusValidation,
+      },
+    });
+  </script>
 </BaseLayout>

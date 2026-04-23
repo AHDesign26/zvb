@@ -40,6 +40,11 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
     {description && <meta property="og:description" content={description} />}
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    <script
+      is:inline
+      src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
+      async
+      defer></script>
   </head>
   <body class="bg-background font-body text-on-surface antialiased overflow-x-hidden">
     <WireBackground />

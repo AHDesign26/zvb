@@ -1,0 +1,21 @@
+name = "zvb-contact"
+main = "src/index.ts"
+compatibility_date = "2025-01-15"
+compatibility_flags = ["nodejs_compat"]
+
+[vars]
+OWNER_EMAIL = "info@zvb.bg"
+FROM_EMAIL = "ZVB <noreply@zvb.bg>"
+ALLOWED_ORIGINS = "https://zvb.bg,https://www.zvb.bg"
+# For local `wrangler dev` testing you can temporarily add http://localhost:4321
+
+# Rate-limit store (5 requests per 10 min per IP).
+# Create with: wrangler kv:namespace create CONTACT_RL
+# Paste the returned id below.
+[[kv_namespaces]]
+binding = "CONTACT_RL"
+id = "REPLACE_WITH_KV_NAMESPACE_ID"
+
+# Secrets (set with `wrangler secret put <NAME>`):
+#   TURNSTILE_SECRET
+#   RESEND_API_KEY

@@ -9,7 +9,14 @@ import svelteConfig from './svelte.config.js';
 
 export default [
   {
-    ignores: ['dist/**', '.astro/**', 'node_modules/**', 'public/admin/**', 'pnpm-lock.yaml'],
+    ignores: [
+      'dist/**',
+      '.astro/**',
+      'node_modules/**',
+      'public/admin/**',
+      'workers/**',
+      'pnpm-lock.yaml',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

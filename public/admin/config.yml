@@ -241,6 +241,11 @@ collections:
                   - { name: messageLabel, label: "Етикет: Съобщение", widget: string }
                   - { name: messagePlaceholder, label: "Placeholder: Съобщение", widget: string }
                   - { name: submitLabel, label: "Текст бутон", widget: string }
+                  - { name: statusSuccess, label: "Статус: Успех", widget: text }
+                  - { name: statusError, label: "Статус: Грешка", widget: text }
+                  - { name: statusCaptcha, label: "Статус: Captcha грешка", widget: text }
+                  - { name: statusRateLimited, label: "Статус: Rate limit", widget: text }
+                  - { name: statusValidation, label: "Статус: Валидация", widget: text }
 
       - name: about
         label: Страница "За нас"
@@ -426,6 +431,11 @@ collections:
               - { name: detailsLabel, label: "Етикет: Детайли", widget: string }
               - { name: detailsPlaceholder, label: "Placeholder: Детайли", widget: string }
               - { name: submitLabel, label: "Бутон Изпратете", widget: string }
+              - { name: statusSuccess, label: "Статус: Успех", widget: text }
+              - { name: statusError, label: "Статус: Грешка", widget: text }
+              - { name: statusCaptcha, label: "Статус: Captcha грешка", widget: text }
+              - { name: statusRateLimited, label: "Статус: Rate limit", widget: text }
+              - { name: statusValidation, label: "Статус: Валидация", widget: text }
           - { name: footerNote, label: Бележка под формата, widget: string }
           - { name: footerNoteHighlight, label: Осветена част, widget: string }
 

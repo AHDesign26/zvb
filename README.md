@@ -52,6 +52,18 @@ Then open <http://localhost:4321/admin/>.
 4. Add the client as a collaborator on the `AHDesign26/zvb` repository.
 5. Share `https://zvb.bg/admin/` with the client — they log in via GitHub and edit.
 
+## Contact forms
+
+Both forms (home page contact + `/request-form`) POST to a separate Cloudflare Worker ([workers/contact/](workers/contact/)) which:
+
+- verifies Cloudflare Turnstile (invisible)
+- rejects honeypot-filled submissions
+- validates with Zod, rate-limits by IP (5 per 10 min), sends owner + sender emails via Resend
+
+See [workers/contact/README.md](workers/contact/README.md) for deployment.
+
+The frontend endpoint + Turnstile site key are in [src/config/contact.ts](src/config/contact.ts).
+
 ## Deploy
 
 Pushes to `main` trigger [.github/workflows/deploy.yml](.github/workflows/deploy.yml), which runs `withastro/action@v3` with pnpm and publishes to GitHub Pages.
