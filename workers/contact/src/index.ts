@@ -147,7 +147,7 @@ function senderEmailHtml(data: ContactInput): string {
     <div style="background:#1a237e;color:#ffc107;padding:20px 24px;font-weight:700;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;">ZVB</div>
     <div style="padding:24px;color:#1a1c1c;font-family:sans-serif;">
       <h2 style="color:#1a237e;margin:0 0 16px;">Здравейте, ${escapeHtml(data.name)}!</h2>
-      <p>Благодарим, че се свързахте с нас. Получихме вашето запитване и ще се свържем с вас в рамките на <strong>24 часа</strong> в работни дни.</p>
+      <p>Благодарим, че се свързахте с нас. Получихме вашето запитване и ще се свържем с вас в рамките на <strong>5 работни дни</strong>.</p>
       <p style="margin-top:24px;">Ако искате да добавите нещо към заявката, отговорете директно на този имейл.</p>
       <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0;">
       <p style="font-size:13px;color:#455a64;">ZVB — Електрически и умни системи<br>
