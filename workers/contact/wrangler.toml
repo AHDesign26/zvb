@@ -16,6 +16,7 @@ ALLOWED_ORIGINS = "https://zvb.bg,https://www.zvb.bg"
 binding = "CONTACT_RL"
 id = "9d9afbfa20464d568c1083ce549fd7ef"
 
+
 # Secrets (set with `wrangler secret put <NAME>`):
 #   TURNSTILE_SECRET
 #   RESEND_API_KEY
