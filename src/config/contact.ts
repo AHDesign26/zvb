@@ -8,4 +8,4 @@
 
 export const CONTACT_WORKER_URL = 'https://zvb-contact.hamiddarabi.workers.dev/';
 
-export const TURNSTILE_SITE_KEY = 'REPLACE_WITH_TURNSTILE_SITE_KEY';
+export const TURNSTILE_SITE_KEY = '0x4AAAAAADBwTlIAVgmQ8wiD';
