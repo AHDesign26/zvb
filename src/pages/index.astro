@@ -473,7 +473,21 @@ import site from '../content/site.json';
             class="hidden sm:block absolute top-6 right-6 w-12 h-12 border-t-4 border-r-4 border-secondary/20 rounded-tr-xl"
           >
           </div>
-          <form class="space-y-10" method="post" action="#">
+          <form id="home-contact-form" class="space-y-10" method="post" action="#" novalidate>
+            <!-- Honeypot: real users can't see it; bots fill it and we drop the submission -->
+            <div
+              aria-hidden="true"
+              style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;overflow:hidden;"
+            >
+              <label for="home-website">Website (do not fill)</label>
+              <input
+                id="home-website"
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+              />
+            </div>
             <div class="space-y-3">
               <label
                 class="font-label text-[10px] font-bold uppercase tracking-widest text-primary"
@@ -535,15 +549,43 @@ import site from '../content/site.json';
                 placeholder={home.contact.form.messagePlaceholder}
                 rows="4"></textarea>
             </div>
+            <div id="home-turnstile"></div>
             <button
               type="submit"
-              class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl"
+              class="w-full bg-primary text-white py-6 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all relative group overflow-hidden shadow-xl disabled:opacity-70 disabled:cursor-not-allowed"
             >
               <span class="relative z-10">{home.contact.form.submitLabel}</span>
             </button>
+            <p
+              id="home-contact-status"
+              role="status"
+              aria-live="polite"
+              class="mt-6 text-sm text-center"
+            >
+            </p>
           </form>
         </div>
       </div>
     </div>
   </section>
+
+  <script>
+    import { initContactForm } from '../scripts/contactForm';
+    import homeContent from '../content/pages/home.json';
+
+    const f = homeContent.contact.form;
+    void initContactForm({
+      formId: 'home-contact-form',
+      statusId: 'home-contact-status',
+      turnstileContainerId: 'home-turnstile',
+      type: 'contact',
+      messages: {
+        success: f.statusSuccess,
+        error: f.statusError,
+        captcha: f.statusCaptcha,
+        rateLimited: f.statusRateLimited,
+        validation: f.statusValidation,
+      },
+    });
+  </script>
 </BaseLayout>
