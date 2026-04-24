@@ -38,6 +38,17 @@ site_url: https://zvb.bg
 display_url: https://zvb.bg
 logo_url: /media/logo.png
 
+# Keep uploaded images as the editor sent them — Sveltia's default
+# raster_image transformation converts/resizes photos on upload (and has
+# been observed forcing them into a square frame). Setting
+# `transformations: {}` explicitly turns that pipeline off so a 4000×3000
+# JPG is stored as a 4000×3000 JPG.
+# Docs: https://sveltiacms.app/en/docs/media/internal
+media_libraries:
+  default:
+    config:
+      transformations: {}
+
 collections:
   # ───────── Singletons (one file per page) ─────────
   - name: site
