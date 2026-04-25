@@ -74,15 +74,12 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
             <div
               class="gallery-item group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
               data-category={project.data.category}
-              style="height:300px;"
             >
               <img
                 src={project.data.image}
                 alt={project.data.title}
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                class="w-full h-auto block transition-transform duration-700 group-hover:scale-110"
                 loading="lazy"
-                width="800"
-                height="600"
               />
               <div class="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors duration-500" />
               <div class="absolute bottom-0 left-0 w-full p-6 bg-gradient-to-t from-primary via-primary/60 to-transparent translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
