@@ -74,11 +74,14 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
             <div
               class="gallery-item group relative overflow-hidden rounded-2xl shadow-md hover:shadow-2xl transition-all duration-500 cursor-pointer"
               data-category={project.data.category}
+              data-src={project.data.image}
+              data-title={project.data.title}
             >
               <img
                 src={project.data.image}
                 alt={project.data.title}
-                class="w-full h-auto block transition-transform duration-700 group-hover:scale-110"
+                class="w-full object-cover block transition-transform duration-700 group-hover:scale-110"
+                style="height:300px;"
                 loading="lazy"
               />
               <div class="absolute inset-0 bg-primary/30 group-hover:bg-primary/10 transition-colors duration-500" />
@@ -93,6 +96,28 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
         }
       </div>
 
+      <!-- Lightbox -->
+      <div
+        id="lightbox"
+        class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm"
+        style="display:none!important;"
+      >
+        <button
+          id="lightbox-close"
+          class="absolute top-5 right-6 text-white text-4xl leading-none font-bold hover:text-secondary transition-colors z-10"
+          aria-label="Close">&times;</button
+        >
+        <div id="lightbox-content" class="relative max-w-5xl w-full mx-4">
+          <img
+            id="lightbox-img"
+            src=""
+            alt=""
+            class="w-full max-h-[85vh] object-contain rounded-xl shadow-2xl"
+          />
+          <p id="lightbox-title" class="text-white text-center mt-3 font-headline text-lg"></p>
+        </div>
+      </div>
+
       <div id="no-results" class="hidden text-center py-24">
         <span class="material-symbols-outlined text-6xl text-slate-300 mb-4 block" translate="no"
           >image_search</span
@@ -103,6 +128,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
   </section>
 
   <script>
+    // Filter logic
     const filterBtns = document.querySelectorAll<HTMLElement>('.filter-btn');
     const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
     const noResults = document.getElementById('no-results');
@@ -130,6 +156,41 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
           noResults.classList.toggle('hidden', visibleCount > 0);
         }
       });
+    });
+
+    // Lightbox logic
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    const lightboxTitle = document.getElementById('lightbox-title') as HTMLElement;
+    const lightboxContent = document.getElementById('lightbox-content') as HTMLElement;
+    const lightboxClose = document.getElementById('lightbox-close') as HTMLElement;
+
+    function openLightbox(el: HTMLElement) {
+      lightboxImg.src = el.dataset.src ?? '';
+      lightboxImg.alt = el.dataset.title ?? '';
+      lightboxTitle.textContent = el.dataset.title ?? '';
+      lightbox.style.removeProperty('display');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.style.display = 'none';
+      document.body.style.overflow = '';
+      lightboxImg.src = '';
+    }
+
+    galleryItems.forEach((item) => {
+      item.addEventListener('click', () => openLightbox(item));
+    });
+
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxContent.addEventListener('click', (e) => e.stopPropagation());
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
 </BaseLayout>
