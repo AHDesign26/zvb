@@ -1,7 +1,7 @@
 {
-  "title": "IP камери и наблюдение",
-  "category": "cctv",
-  "categoryLabel": "Сигурност и CCTV",
+  "title": "Интеграция на умен дом",
+  "category": "smarthome",
+  "categoryLabel": "Системи за умен дом",
   "image": "/media/3.png",
   "order": 4
 }
