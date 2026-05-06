@@ -23,12 +23,12 @@
     "title": "Пълен набор от технически услуги",
     "description": "От електрически инсталации до интеграция на умен дом — покриваме всеки аспект на системите на вашия имот, изградени да издържат с 15 години опит зад нас.",
     "items": [
-      { "icon": "electric_bolt", "title": "Електроинженерство", "variant": "accent" },
-      { "icon": "videocam", "title": "Сигурност и CCTV", "variant": "default" },
-      { "icon": "lan", "title": "IT Инфраструктура", "variant": "default" },
-      { "icon": "solar_power", "title": "Слънчеви енергийни системи", "variant": "default" },
-      { "icon": "hub", "title": "Системи за умен дом", "variant": "default" },
-      { "icon": "lightbulb", "title": "Дизайн на осветление", "variant": "accent" }
+      { "id": "electrical", "icon": "electric_bolt", "title": "Електроинженерство", "variant": "accent" },
+      { "id": "cctv", "icon": "videocam", "title": "Сигурност и CCTV", "variant": "default" },
+      { "id": "it", "icon": "lan", "title": "IT Инфраструктура", "variant": "default" },
+      { "id": "solar", "icon": "solar_power", "title": "Слънчеви енергийни системи", "variant": "default" },
+      { "id": "smarthome", "icon": "hub", "title": "Системи за умен дом", "variant": "default" },
+      { "id": "lighting", "icon": "lightbulb", "title": "Дизайн на осветление", "variant": "accent" }
     ]
   },
   "about": {

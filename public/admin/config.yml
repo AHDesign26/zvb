@@ -117,7 +117,7 @@ collections:
   - name: pages
     label: Pages
     label_singular: Page
-    description: Content for Home, About, Gallery, and Request pages.
+    description: Content for Home, Services, About, Gallery, and Request pages.
     files:
       - name: home
         label: Home page
@@ -170,6 +170,17 @@ collections:
                 label: Services (cards)
                 widget: list
                 fields:
+                  - name: id
+                    label: Service ID
+                    widget: select
+                    hint: "⚠ Links this card to the matching section on /services. Do not change unless you update services.json too."
+                    options:
+                      - { label: "Electrical engineering", value: electrical }
+                      - { label: "Security & CCTV", value: cctv }
+                      - { label: "IT infrastructure", value: it }
+                      - { label: "Solar systems", value: solar }
+                      - { label: "Smart home", value: smarthome }
+                      - { label: "Lighting design", value: lighting }
                   - { name: icon, label: Material icon name, widget: string, hint: "Examples: electric_bolt, videocam, lan" }
                   - { name: title, label: Title, widget: string }
                   - { name: variant, label: Variant, widget: select, options: ["default", "accent"], default: "default" }
@@ -262,6 +273,79 @@ collections:
                   - { name: statusCaptcha, label: "Status: Captcha failed", widget: text }
                   - { name: statusRateLimited, label: "Status: Rate-limited", widget: text }
                   - { name: statusValidation, label: "Status: Validation failed", widget: text }
+
+      - name: services
+        label: "\"Services\" page"
+        file: src/content/pages/services.json
+        format: json
+        fields:
+          - name: meta
+            label: Meta
+            widget: object
+            fields:
+              - { name: title, label: Browser title, widget: string }
+              - { name: description, label: Meta description, widget: text }
+          - name: hero
+            label: Hero section
+            widget: object
+            fields:
+              - { name: eyebrow, label: Eyebrow, widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - { name: image, label: Background image, widget: image }
+              - { name: catalogLabel, label: Catalog button label, widget: string, hint: "Text on the download button. The catalog URL is managed under Site Settings → Catalog URL." }
+          - name: intro
+            label: Intro strip
+            widget: object
+            fields:
+              - { name: badge, label: Badge text, widget: string }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+          - name: services
+            label: Services (sections)
+            widget: list
+            hint: "Each item is one full section on the page. Do not add or remove items — contact the developer to change the list."
+            fields:
+              - name: id
+                label: Service ID (anchor)
+                widget: select
+                hint: "⚠ Used for anchor links from the home page. Must match the gallery key."
+                options:
+                  - { label: "Electrical engineering", value: electrical }
+                  - { label: "Security & CCTV", value: cctv }
+                  - { label: "IT infrastructure", value: it }
+                  - { label: "Solar systems", value: solar }
+                  - { label: "Smart home", value: smarthome }
+                  - { label: "Lighting design", value: lighting }
+              - { name: icon, label: Material icon name, widget: string, hint: "Examples: electric_bolt, videocam, lan, solar_power, hub, lightbulb" }
+              - { name: eyebrow, label: Eyebrow label, widget: string, hint: "e.g. 01 / Услуга" }
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - name: features
+                label: Feature bullets
+                widget: list
+                field: { name: feature, label: Feature, widget: string }
+              - name: galleryKey
+                label: Gallery filter key
+                widget: select
+                hint: "⚠ Must match the gallery filter. Determines which projects are shown when the button is clicked."
+                options:
+                  - { label: "Electrical engineering", value: electrical }
+                  - { label: "Security & CCTV", value: cctv }
+                  - { label: "IT infrastructure", value: it }
+                  - { label: "Solar systems", value: solar }
+                  - { label: "Smart home", value: smarthome }
+                  - { label: "Lighting design", value: lighting }
+              - { name: galleryLabel, label: "Gallery button label", widget: string, hint: "Text shown on the 'View Projects' button" }
+          - name: cta
+            label: CTA section
+            widget: object
+            fields:
+              - { name: title, label: Title, widget: string }
+              - { name: description, label: Description, widget: text }
+              - { name: badges, label: Badges, widget: list, field: { name: badge, widget: string, label: Badge } }
+              - { name: callLabel, label: "Button: Call", widget: string }
+              - { name: quoteLabel, label: "Button: Request quote", widget: string }
 
       - name: about
         label: "\"About us\" page"

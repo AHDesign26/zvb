@@ -12,7 +12,7 @@
   "qrCode": "/media/qr-code.jpg",
   "nav": [
     { "label": "За нас", "href": "/about-us" },
-    { "label": "Услуги", "href": "/#services" },
+    { "label": "Услуги", "href": "/services" },
     { "label": "Проекти", "href": "/gallery" },
     { "label": "Контакт", "href": "/#contact" }
   ],
@@ -31,7 +31,7 @@
     "resourcesTitle": "Ресурси",
     "resources": [
       { "label": "За нас", "href": "/about-us" },
-      { "label": "Услуги", "href": "/#services" },
+      { "label": "Услуги", "href": "/services" },
       { "label": "Проекти", "href": "/gallery" },
       { "label": "Контакт", "href": "/#contact" }
     ],

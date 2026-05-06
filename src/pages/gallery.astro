@@ -133,30 +133,39 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
     const galleryItems = document.querySelectorAll<HTMLElement>('.gallery-item');
     const noResults = document.getElementById('no-results');
 
-    filterBtns.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        filterBtns.forEach((b) => b.classList.remove('active'));
-        btn.classList.add('active');
+    function applyFilter(filter: string) {
+      filterBtns.forEach((b) => b.classList.remove('active'));
+      const activeBtn = [...filterBtns].find((b) => b.dataset.filter === filter);
+      if (activeBtn) activeBtn.classList.add('active');
 
-        const filter = btn.dataset.filter ?? 'all';
-        let visibleCount = 0;
-
-        galleryItems.forEach((item) => {
-          if (filter === 'all' || item.dataset.category === filter) {
-            item.classList.remove('hidden-item');
-            item.style.position = '';
-            item.style.visibility = '';
-            visibleCount += 1;
-          } else {
-            item.classList.add('hidden-item');
-          }
-        });
-
-        if (noResults) {
-          noResults.classList.toggle('hidden', visibleCount > 0);
+      let visibleCount = 0;
+      galleryItems.forEach((item) => {
+        if (filter === 'all' || item.dataset.category === filter) {
+          item.classList.remove('hidden-item');
+          item.style.position = '';
+          item.style.visibility = '';
+          visibleCount += 1;
+        } else {
+          item.classList.add('hidden-item');
         }
       });
+
+      if (noResults) {
+        noResults.classList.toggle('hidden', visibleCount > 0);
+      }
+    }
+
+    filterBtns.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        applyFilter(btn.dataset.filter ?? 'all');
+      });
     });
+
+    // Auto-apply filter from URL param — e.g. /gallery?category=electrical
+    const urlCategory = new URLSearchParams(window.location.search).get('category');
+    if (urlCategory) {
+      applyFilter(urlCategory);
+    }
 
     // Lightbox logic
     const lightbox = document.getElementById('lightbox') as HTMLElement;
