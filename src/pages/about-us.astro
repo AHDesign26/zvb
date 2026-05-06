@@ -306,7 +306,8 @@ import about from '../content/pages/about.json';
           </button>
         </div>
       </div>
-      <div class="overflow-hidden rounded-3xl reveal-on-scroll">
+      <div class="reveal-on-scroll">
+        <div class="overflow-hidden rounded-3xl">
         <div class="works-slider-track" id="works-slider-track">
           {
             about.works.slides.map((slide) => (
@@ -337,6 +338,7 @@ import about from '../content/pages/about.json';
               </div>
             ))
           }
+        </div>
         </div>
       </div>
       <div class="flex justify-center gap-3 mt-10" id="slider-dots">
@@ -390,8 +392,11 @@ import about from '../content/pages/about.json';
         dots.forEach((d, i) => d.classList.toggle('active', i === current));
       }
 
+      // Arrow buttons
       prevBtn?.addEventListener('click', () => goTo(current - 1));
       nextBtn?.addEventListener('click', () => goTo(current + 1));
+
+      // Dot buttons
       dots.forEach((d) =>
         d.addEventListener('click', () => goTo(parseInt(d.dataset.dot ?? '0', 10))),
       );
@@ -399,15 +404,50 @@ import about from '../content/pages/about.json';
       updateSlideWidths();
       goTo(0);
 
-      let autoplay: ReturnType<typeof setInterval> = setInterval(
-        () => goTo(current + 1 > maxIndex() ? 0 : current + 1),
-        4000,
-      );
-      track?.addEventListener('mouseenter', () => clearInterval(autoplay));
-      track?.addEventListener('mouseleave', () => {
-        autoplay = setInterval(() => goTo(current + 1 > maxIndex() ? 0 : current + 1), 4000);
-      });
+      // Autoplay — paused while the user is interacting
+      let autoplay: ReturnType<typeof setInterval>;
 
+      function startAutoplay() {
+        autoplay = setInterval(() => goTo(current + 1 > maxIndex() ? 0 : current + 1), 4000);
+      }
+      function stopAutoplay() {
+        clearInterval(autoplay);
+      }
+
+      startAutoplay();
+
+      // Pause on hover (desktop)
+      track?.addEventListener('mouseenter', stopAutoplay);
+      track?.addEventListener('mouseleave', startAutoplay);
+
+      // Touch / swipe support (mobile)
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let isSwiping = false;
+
+      track?.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+        isSwiping = false;
+        stopAutoplay();
+      }, { passive: true });
+
+      track?.addEventListener('touchmove', (e) => {
+        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
+        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
+        // Only lock as a horizontal swipe if moving more sideways than up/down
+        if (dx > dy && dx > 8) isSwiping = true;
+      }, { passive: true });
+
+      track?.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (isSwiping && Math.abs(dx) > 50) {
+          dx < 0 ? goTo(current + 1) : goTo(current - 1);
+        }
+        startAutoplay();
+      }, { passive: true });
+
+      // Recalculate on resize
       window.addEventListener('resize', () => {
         updateSlideWidths();
         goTo(current);
