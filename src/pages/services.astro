@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CtaSection from '../components/CtaSection.astro';
+import services from '../content/pages/services.json';
+import site from '../content/site.json';
+---
+
+<BaseLayout title={services.meta.title} description={services.meta.description} activeHref="/services">
+  <!-- Hero -->
+  <section
+    class="relative flex items-end px-6 md:px-12 pt-40 pb-16 overflow-hidden bg-primary"
+    style="min-height:340px;"
+  >
+    <div class="absolute inset-0 z-0">
+      <img
+        src={services.hero.image}
+        alt="Services"
+        class="object-cover w-full h-full opacity-30"
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary/40"></div>
+    </div>
+    <div class="absolute inset-0 z-10 overflow-hidden pointer-events-none opacity-30">
+      <div
+        class="absolute top-1/3 left-0 w-full h-[1px] signal-h text-[#FFC107]"
+        style="animation-duration: 10s;"
+      ></div>
+      <div
+        class="absolute top-2/3 left-0 w-full h-[1px] signal-h text-white"
+        style="animation-duration: 14s; animation-delay: -4s;"
+      ></div>
+      <div
+        class="absolute left-1/4 top-0 h-full w-[1px] signal-v text-[#FFC107]"
+        style="animation-duration: 12s; animation-delay: -2s;"
+      ></div>
+    </div>
+    <div class="relative z-20 max-w-7xl mx-auto w-full reveal-on-scroll">
+      <span class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-4 block">
+        {services.hero.eyebrow}
+      </span>
+      <h1 class="font-headline text-4xl md:text-5xl font-bold text-white mb-4">
+        {services.hero.title}
+      </h1>
+      <p class="text-indigo-200 text-lg max-w-xl mb-8">{services.hero.description}</p>
+      <a
+        href={site.catalogUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-3 bg-secondary text-primary px-7 py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:brightness-110 transition-all shadow-lg"
+      >
+        <span class="material-symbols-outlined text-lg" translate="no">menu_book</span>
+        {services.hero.catalogLabel}
+        <span class="material-symbols-outlined text-base" translate="no">download</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- Intro strip -->
+  <section class="py-16 md:py-20 bg-white relative overflow-hidden">
+    <div
+      class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-16 bg-secondary/30 signal-v text-[#FFC107]"
+    ></div>
+    <div class="max-w-7xl mx-auto px-6 md:px-12 text-center reveal-on-scroll">
+      <span class="text-secondary font-label font-bold tracking-widest text-xs uppercase mb-4 block">
+        {services.intro.badge}
+      </span>
+      <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
+        {services.intro.title}
+      </h2>
+      <p class="text-on-surface-variant text-lg max-w-2xl mx-auto leading-relaxed">
+        {services.intro.description}
+      </p>
+    </div>
+  </section>
+
+  <!-- Services list -->
+  <section class="py-12 md:py-16 bg-background">
+    <div class="max-w-7xl mx-auto px-6 md:px-12 flex flex-col gap-0">
+      {
+        services.services.map((service, i) => {
+          const isEven = i % 2 === 0;
+          return (
+            <div
+              id={service.id}
+              class:list={[
+                'group relative grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden scroll-mt-24',
+                isEven ? 'bg-white' : 'bg-slate-50',
+              ]}
+            >
+              {/* Accent bar */}
+              <div class="absolute top-0 left-0 w-full h-[2px] bg-slate-100 group-hover:bg-secondary/40 transition-colors duration-500" />
+
+              {/* Content side */}
+              <div
+                class:list={[
+                  'flex flex-col justify-center px-8 md:px-12 lg:px-16 py-16 md:py-20 reveal-on-scroll',
+                  isEven ? 'lg:order-1' : 'lg:order-2',
+                ]}
+                style={`transition-delay: ${i * 0.05}s`}
+              >
+                <span class="text-secondary font-label font-bold tracking-widest text-xs uppercase mb-4 block">
+                  {service.eyebrow}
+                </span>
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-14 h-14 rounded-2xl bg-primary flex items-center justify-center flex-shrink-0 shadow-lg">
+                    <span
+                      class="material-symbols-outlined text-secondary"
+                      style="font-size:1.75rem;"
+                      translate="no"
+                    >
+                      {service.icon}
+                    </span>
+                  </div>
+                  <h2 class="font-headline text-2xl md:text-3xl font-bold text-primary leading-tight">
+                    {service.title}
+                  </h2>
+                </div>
+                <p class="text-on-surface-variant text-base md:text-lg leading-relaxed mb-8">
+                  {service.description}
+                </p>
+
+                {/* Feature list */}
+                <ul class="flex flex-col gap-3 mb-10">
+                  {service.features.map((feat) => (
+                    <li class="flex items-start gap-3 text-on-surface text-sm md:text-base">
+                      <svg
+                        class="w-5 h-5 text-secondary flex-shrink-0 mt-0.5"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2.5"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                      </svg>
+                      <span>{feat}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Gallery CTA button */}
+                <div>
+                  <a
+                    href={`/gallery?category=${service.galleryKey}`}
+                    class="inline-flex items-center gap-3 bg-primary text-white px-7 py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all duration-300 shadow-md hover:shadow-xl group/btn"
+                  >
+                    <span class="material-symbols-outlined text-lg" translate="no">photo_library</span>
+                    <span>{service.galleryLabel}</span>
+                    <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover/btn:translate-x-1" translate="no">
+                      north_east
+                    </span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Visual / number side */}
+              <div
+                class:list={[
+                  'relative flex items-center justify-center py-16 md:py-20 px-8 overflow-hidden min-h-[280px]',
+                  isEven ? 'lg:order-2 bg-primary/5' : 'lg:order-1 bg-primary/5',
+                ]}
+              >
+                {/* Large decorative number */}
+                <span
+                  class="absolute select-none font-headline font-bold text-primary/5 pointer-events-none"
+                  style="font-size: clamp(8rem, 20vw, 14rem); line-height:1; user-select:none;"
+                  aria-hidden="true"
+                >
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+
+                {/* Central icon display */}
+                <div class="relative z-10 flex flex-col items-center gap-6 reveal-on-scroll" style={`transition-delay: ${i * 0.05 + 0.15}s`}>
+                  <div class="w-32 h-32 rounded-3xl bg-primary flex items-center justify-center shadow-2xl">
+                    <span
+                      class="material-symbols-outlined text-secondary"
+                      style="font-size:4rem;"
+                      translate="no"
+                    >
+                      {service.icon}
+                    </span>
+                  </div>
+                  <div class="text-center">
+                    <p class="font-headline font-bold text-primary text-lg">{service.title}</p>
+                    <div class="w-12 h-[3px] bg-secondary mx-auto mt-2 rounded-full" />
+                  </div>
+                </div>
+
+                {/* Corner decorations */}
+                <div class="absolute top-4 right-4 w-8 h-8 border-t-2 border-r-2 border-secondary/20 rounded-tr-lg" />
+                <div class="absolute bottom-4 left-4 w-8 h-8 border-b-2 border-l-2 border-secondary/20 rounded-bl-lg" />
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CtaSection
+    title={services.cta.title}
+    description={services.cta.description}
+    badges={services.cta.badges}
+    callLabel={services.cta.callLabel}
+    quoteLabel={services.cta.quoteLabel}
+  />
+</BaseLayout>
