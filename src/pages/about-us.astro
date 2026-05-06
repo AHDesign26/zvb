@@ -308,37 +308,37 @@ import about from '../content/pages/about.json';
       </div>
       <div class="reveal-on-scroll">
         <div class="overflow-hidden rounded-3xl">
-        <div class="works-slider-track" id="works-slider-track">
-          {
-            about.works.slides.map((slide) => (
-              <div class="works-slide w-full md:w-1/2 lg:w-1/3 px-3 flex-shrink-0">
-                <div
-                  class="group relative overflow-hidden rounded-2xl shadow-lg"
-                  style="height: 420px;"
-                >
-                  <img
-                    class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
-                    src={slide.image}
-                    alt={slide.title}
-                    loading="lazy"
-                    width="800"
-                    height="600"
-                  />
-                  <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors duration-500" />
-                  <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary via-primary/60 to-transparent">
-                    <span class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-3 block">
-                      {slide.category}
-                    </span>
-                    <h4 class="text-white font-headline text-2xl font-bold">{slide.title}</h4>
-                    <p class="text-indigo-200 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {slide.description}
-                    </p>
+          <div class="works-slider-track" id="works-slider-track">
+            {
+              about.works.slides.map((slide) => (
+                <div class="works-slide w-full md:w-1/2 lg:w-1/3 px-3 flex-shrink-0">
+                  <div
+                    class="group relative overflow-hidden rounded-2xl shadow-lg"
+                    style="height: 420px;"
+                  >
+                    <img
+                      class="w-full h-full object-cover transition-all duration-700 group-hover:scale-110"
+                      src={slide.image}
+                      alt={slide.title}
+                      loading="lazy"
+                      width="800"
+                      height="600"
+                    />
+                    <div class="absolute inset-0 bg-primary/40 group-hover:bg-primary/10 transition-colors duration-500" />
+                    <div class="absolute bottom-0 left-0 w-full p-8 bg-gradient-to-t from-primary via-primary/60 to-transparent">
+                      <span class="text-secondary font-label text-[10px] uppercase tracking-widest font-bold mb-3 block">
+                        {slide.category}
+                      </span>
+                      <h4 class="text-white font-headline text-2xl font-bold">{slide.title}</h4>
+                      <p class="text-indigo-200 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {slide.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
-          }
-        </div>
+              ))
+            }
+          </div>
         </div>
       </div>
       <div class="flex justify-center gap-3 mt-10" id="slider-dots">
@@ -425,27 +425,49 @@ import about from '../content/pages/about.json';
       let touchStartY = 0;
       let isSwiping = false;
 
-      track?.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].clientX;
-        touchStartY = e.changedTouches[0].clientY;
-        isSwiping = false;
-        stopAutoplay();
-      }, { passive: true });
+      track?.addEventListener(
+        'touchstart',
+        (e: TouchEvent) => {
+          const touch = e.changedTouches.item(0);
+          if (!touch) return;
+          touchStartX = touch.clientX;
+          touchStartY = touch.clientY;
+          isSwiping = false;
+          stopAutoplay();
+        },
+        { passive: true },
+      );
 
-      track?.addEventListener('touchmove', (e) => {
-        const dx = Math.abs(e.changedTouches[0].clientX - touchStartX);
-        const dy = Math.abs(e.changedTouches[0].clientY - touchStartY);
-        // Only lock as a horizontal swipe if moving more sideways than up/down
-        if (dx > dy && dx > 8) isSwiping = true;
-      }, { passive: true });
+      track?.addEventListener(
+        'touchmove',
+        (e: TouchEvent) => {
+          const touch = e.changedTouches.item(0);
+          if (!touch) return;
+          const dx = Math.abs(touch.clientX - touchStartX);
+          const dy = Math.abs(touch.clientY - touchStartY);
+          // Only lock as a horizontal swipe if moving more sideways than up/down
+          if (dx > dy && dx > 8) isSwiping = true;
+        },
+        { passive: true },
+      );
 
-      track?.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (isSwiping && Math.abs(dx) > 50) {
-          dx < 0 ? goTo(current + 1) : goTo(current - 1);
-        }
-        startAutoplay();
-      }, { passive: true });
+      track?.addEventListener(
+        'touchend',
+        (e: TouchEvent) => {
+          const touch = e.changedTouches.item(0);
+          if (!touch) return;
+          const dx = touch.clientX - touchStartX;
+          if (isSwiping && Math.abs(dx) > 50) {
+            if (dx < 0) {
+              goTo(current + 1);
+            } else {
+              goTo(current - 1);
+            }
+          }
+          startAutoplay();
+        },
+        { passive: true },
+      );
 
       // Recalculate on resize
       window.addEventListener('resize', () => {

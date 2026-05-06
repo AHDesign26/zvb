@@ -5,7 +5,11 @@ import services from '../content/pages/services.json';
 import site from '../content/site.json';
 ---
 
-<BaseLayout title={services.meta.title} description={services.meta.description} activeHref="/services">
+<BaseLayout
+  title={services.meta.title}
+  description={services.meta.description}
+  activeHref="/services"
+>
   <!-- Hero -->
   <section
     class="relative flex items-end px-6 md:px-12 pt-40 pb-16 overflow-hidden bg-primary"
@@ -26,18 +30,23 @@ import site from '../content/site.json';
       <div
         class="absolute top-1/3 left-0 w-full h-[1px] signal-h text-[#FFC107]"
         style="animation-duration: 10s;"
-      ></div>
+      >
+      </div>
       <div
         class="absolute top-2/3 left-0 w-full h-[1px] signal-h text-white"
         style="animation-duration: 14s; animation-delay: -4s;"
-      ></div>
+      >
+      </div>
       <div
         class="absolute left-1/4 top-0 h-full w-[1px] signal-v text-[#FFC107]"
         style="animation-duration: 12s; animation-delay: -2s;"
-      ></div>
+      >
+      </div>
     </div>
     <div class="relative z-20 max-w-7xl mx-auto w-full reveal-on-scroll">
-      <span class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-4 block">
+      <span
+        class="text-secondary font-label font-bold tracking-widest text-sm uppercase mb-4 block"
+      >
         {services.hero.eyebrow}
       </span>
       <h1 class="font-headline text-4xl md:text-5xl font-bold text-white mb-4">
@@ -61,9 +70,12 @@ import site from '../content/site.json';
   <section class="py-16 md:py-20 bg-white relative overflow-hidden">
     <div
       class="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-16 bg-secondary/30 signal-v text-[#FFC107]"
-    ></div>
+    >
+    </div>
     <div class="max-w-7xl mx-auto px-6 md:px-12 text-center reveal-on-scroll">
-      <span class="text-secondary font-label font-bold tracking-widest text-xs uppercase mb-4 block">
+      <span
+        class="text-secondary font-label font-bold tracking-widest text-xs uppercase mb-4 block"
+      >
         {services.intro.badge}
       </span>
       <h2 class="font-headline text-3xl md:text-4xl font-bold text-primary mb-6">
@@ -146,9 +158,14 @@ import site from '../content/site.json';
                     href={`/gallery?category=${service.galleryKey}`}
                     class="inline-flex items-center gap-3 bg-primary text-white px-7 py-4 rounded-xl font-label font-bold text-xs uppercase tracking-widest hover:bg-secondary hover:text-primary transition-all duration-300 shadow-md hover:shadow-xl group/btn"
                   >
-                    <span class="material-symbols-outlined text-lg" translate="no">photo_library</span>
+                    <span class="material-symbols-outlined text-lg" translate="no">
+                      photo_library
+                    </span>
                     <span>{service.galleryLabel}</span>
-                    <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover/btn:translate-x-1" translate="no">
+                    <span
+                      class="material-symbols-outlined text-base transition-transform duration-300 group-hover/btn:translate-x-1"
+                      translate="no"
+                    >
                       north_east
                     </span>
                   </a>
@@ -172,7 +189,10 @@ import site from '../content/site.json';
                 </span>
 
                 {/* Central icon display */}
-                <div class="relative z-10 flex flex-col items-center gap-6 reveal-on-scroll" style={`transition-delay: ${i * 0.05 + 0.15}s`}>
+                <div
+                  class="relative z-10 flex flex-col items-center gap-6 reveal-on-scroll"
+                  style={`transition-delay: ${i * 0.05 + 0.15}s`}
+                >
                   <div class="w-32 h-32 rounded-3xl bg-primary flex items-center justify-center shadow-2xl">
                     <span
                       class="material-symbols-outlined text-secondary"
