@@ -307,9 +307,9 @@ collections:
             hint: "Each item is one full section on the page. Do not add or remove items — contact the developer to change the list."
             fields:
               - name: id
-                label: Service ID (anchor)
+                label: Service ID
                 widget: select
-                hint: "⚠ Used for anchor links from the home page. Must match the gallery key."
+                hint: "⚠ Used both as the anchor link from the home page and as the gallery filter key."
                 options:
                   - { label: "Electrical engineering", value: electrical }
                   - { label: "Security & CCTV", value: cctv }
@@ -325,17 +325,6 @@ collections:
                 label: Feature bullets
                 widget: list
                 field: { name: feature, label: Feature, widget: string }
-              - name: galleryKey
-                label: Gallery filter key
-                widget: select
-                hint: "⚠ Must match the gallery filter. Determines which projects are shown when the button is clicked."
-                options:
-                  - { label: "Electrical engineering", value: electrical }
-                  - { label: "Security & CCTV", value: cctv }
-                  - { label: "IT infrastructure", value: it }
-                  - { label: "Solar systems", value: solar }
-                  - { label: "Smart home", value: smarthome }
-                  - { label: "Lighting design", value: lighting }
               - { name: galleryLabel, label: "Gallery button label", widget: string, hint: "Text shown on the 'View Projects' button" }
           - name: cta
             label: CTA section
