@@ -7,3 +7,7 @@ media
 workers
 *.min.js
 *.min.css
+
+# Sveltia CMS rewrites content files in its own JSON style. Policing that style here made
+# every CMS publish fail its required check, so it stopped being publishable at all.
+src/content
