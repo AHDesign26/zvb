@@ -8,9 +8,11 @@ CMS loads. The only thing the CMS is still missing at that point is permission t
 the repository, and this Worker supplies it: it checks the Access assertion itself, then
 completes the CMS's popup handshake with a fine-grained repository token held as a secret.
 
-- **Route:** `zvb.bg/admin/auth` — a route on the site's own host, because the site is
-  static files on GitHub Pages and cannot answer a URL. Living under `/admin` means the
-  same Access application covers it, with no second app or DNS record.
+- **Route:** `zvb.bg/admin/auth`, matched as `zvb.bg/admin/auth*` — a route on the site's own
+  host, because the site is static files on GitHub Pages and cannot answer a URL. Living
+  under `/admin` means the same Access application covers it, with no second app or DNS
+  record. The wildcard is required: an exact route misses the CMS's `?provider=…` query
+  string and the popup falls through to GitHub Pages (see the note in `wrangler.toml`).
 - **Same origin:** the popup stays on `zvb.bg`, which is the only origin Sveltia accepts the
   reply from.
 - **No OAuth:** `public/admin/config.yml` sets `base_url: https://zvb.bg` and
