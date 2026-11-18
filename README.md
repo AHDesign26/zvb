@@ -46,12 +46,17 @@ assertion to check.
 [workers/cms-auth/](workers/cms-auth/) completes the CMS handshake with a repository token
 held as the `CMS_GITHUB_TOKEN` secret.
 
+**Publishing** — there is no draft workflow: **Save & Publish** commits straight to `main`
+and GitHub Actions rebuilds the site. Publishing relies on the repository-admin bypass of
+the `main_control` ruleset (see the note in `public/admin/config.yml`), so the token has to
+belong to an admin.
+
 **Production setup (one-time, see [workers/cms-auth/README.md](workers/cms-auth/README.md))**:
 
 1. Put Cloudflare Access in front of `zvb.bg/admin`, allowing the editors' email addresses.
    The zone must be proxied (orange cloud) for any of this to apply.
-2. Create a fine-grained GitHub token on `AHDesign26/zvb` with **Contents** and **Pull
-   requests** read and write, and an expiry.
+2. Create a fine-grained GitHub token on `AHDesign26/zvb` with **Contents: Read and
+   write**, and an expiry.
 3. Fill `ACCESS_TEAM_DOMAIN` and `ACCESS_AUD` in
    [workers/cms-auth/wrangler.toml](workers/cms-auth/wrangler.toml), set the token with
    `wrangler secret put CMS_GITHUB_TOKEN`, and deploy the Worker.
