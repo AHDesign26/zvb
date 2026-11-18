@@ -36,21 +36,30 @@ Editable content lives under [src/content/](src/content/):
 
 ## Admin (Sveltia CMS)
 
-**Local dev** — edit content while running `pnpm dev`:
+**Local dev** — edit content while running `pnpm dev`: open <http://localhost:4321/admin/>.
+Sveltia works against the local repository, or use "Sign In with Token" with a personal
+token. The production sign-in endpoint refuses locally, because there is no Access
+assertion to check.
 
-```bash
-npx @sveltia/cms-proxy-server   # in a separate terminal
-```
+**Signing in** — click "Sign in with GitHub". There is no GitHub account involved:
+`/admin` is behind Cloudflare Access, which has already established who the visitor is, and
+[workers/cms-auth/](workers/cms-auth/) completes the CMS handshake with a repository token
+held as the `CMS_GITHUB_TOKEN` secret.
 
-Then open <http://localhost:4321/admin/>.
+**Production setup (one-time, see [workers/cms-auth/README.md](workers/cms-auth/README.md))**:
 
-**Production auth (one-time setup for client handoff)**:
+1. Put Cloudflare Access in front of `zvb.bg/admin`, allowing the editors' email addresses.
+   The zone must be proxied (orange cloud) for any of this to apply.
+2. Create a fine-grained GitHub token on `AHDesign26/zvb` with **Contents** and **Pull
+   requests** read and write, and an expiry.
+3. Fill `ACCESS_TEAM_DOMAIN` and `ACCESS_AUD` in
+   [workers/cms-auth/wrangler.toml](workers/cms-auth/wrangler.toml), set the token with
+   `wrangler secret put CMS_GITHUB_TOKEN`, and deploy the Worker.
+4. Share `https://zvb.bg/admin/` with the client. Access asks for their email; the blue
+   button then signs them in and they edit.
 
-1. Deploy the [sveltia-cms-auth Cloudflare Worker](https://github.com/sveltia/sveltia-cms-auth) (free, ~5 minutes).
-2. Register a GitHub OAuth App pointing at the worker URL.
-3. Uncomment `base_url` in [public/admin/config.yml](public/admin/config.yml) and point it at the worker.
-4. Add the client as a collaborator on the `AHDesign26/zvb` repository.
-5. Share `https://zvb.bg/admin/` with the client — they log in via GitHub and edit.
+`public/admin/config.yml` points the CMS at `https://zvb.bg/admin/auth` for this
+(`base_url` + `auth_endpoint`).
 
 ## Contact forms
 

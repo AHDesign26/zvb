@@ -5,16 +5,22 @@
 #
 # Deployment notes:
 # 1. Set `backend.repo` to `<github-user>/<repo-name>` after the repo is renamed/forked.
-# 2. Deploy the Sveltia OAuth worker from https://github.com/sveltia/sveltia-cms-auth
-#    to Cloudflare Workers, then set `backend.base_url` to that worker URL.
-# 3. For local development, run `pnpm dev` and the admin is available at /admin/ with
-#    `local_backend: true` enabled below (uses `npx @sveltia/cms-proxy-server` bridge).
+# 2. Sign-in does not go to GitHub. /admin is behind Cloudflare Access, so pressing the
+#    button is enough: the Worker in workers/cms-auth/ answers the CMS's sign-in and hands
+#    it a repository token held as a secret. Deploy that Worker once and set its
+#    CMS_GITHUB_TOKEN secret — see workers/cms-auth/README.md.
+# 3. For local development, run `pnpm dev` and open /admin/. The sign-in endpoint refuses
+#    outside Access, so work against the local repository, or use "Sign In with Token".
 
 backend:
   name: github
   repo: AHDesign26/zvb
   branch: main
-  base_url: https://sveltia-cms-auth.hamiddarabi.workers.dev
+  # Sign-in is the site itself, not an OAuth worker: /admin/auth is answered by
+  # workers/cms-auth/ on this origin. Left unset, `base_url` falls back to Netlify's OAuth
+  # service, which has no record of this site and answers the sign-in with a 404.
+  base_url: https://zvb.bg
+  auth_endpoint: admin/auth
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
     update: 'Update {{collection}} "{{slug}}"'

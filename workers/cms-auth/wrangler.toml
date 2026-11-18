@@ -1,0 +1,37 @@
+name = "zvb-cms-auth"
+main = "src/index.ts"
+compatibility_date = "2025-01-15"
+
+# The login shell is logged in to two Cloudflare accounts, so the deploy names the one that
+# holds the zvb.bg zone and the other ZVB Workers.
+account_id = "c7797b1a7bf474da729095f631a5356a"
+
+# The CMS opens this URL in a popup when the editor presses "Sign in with GitHub".
+# It is a route on the site's own host rather than a workers.dev address for two
+# reasons: the Cloudflare Access application that covers /admin covers this path too,
+# so there is no second application or DNS record to keep in step, and the popup ends
+# up on the same origin as the CMS, which is the origin Sveltia accepts the reply from.
+routes = [
+  { pattern = "zvb.bg/admin/auth", zone_name = "zvb.bg" }
+]
+
+# A workers.dev hostname would be a second way to reach the endpoint. It would still
+# refuse every request that carries no Access assertion, but there is no reason to
+# publish an address for it.
+workers_dev = false
+
+[vars]
+# Zero Trust → Settings → General → Team domain (the part before
+# .cloudflareaccess.com). Also in the URL Access sends an unauthenticated visitor to.
+ACCESS_TEAM_DOMAIN = "h4mid24.cloudflareaccess.com"
+
+# Zero Trust → Access → Applications → the `zvb.bg/admin` application → Overview →
+# Application Audience (AUD) Tag. Identifies that one application, so a token minted
+# for a different Access app on the same team is not accepted here.
+ACCESS_AUD = "18c16748e450417fab52d706fe41ebf7af0e98ad097c3ef6cee7cfe2b66c31f8"
+
+# Secret (set with `npx wrangler secret put CMS_GITHUB_TOKEN`):
+#   CMS_GITHUB_TOKEN — a GitHub fine-grained personal access token on AHDesign26/zvb
+#                      with Contents: read and write and Pull requests: read and write.
+#                      The second one is needed because publish_mode is
+#                      editorial_workflow: every publish creates and merges a PR.
