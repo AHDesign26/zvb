@@ -11,8 +11,13 @@ account_id = "c7797b1a7bf474da729095f631a5356a"
 # reasons: the Cloudflare Access application that covers /admin covers this path too,
 # so there is no second application or DNS record to keep in step, and the popup ends
 # up on the same origin as the CMS, which is the origin Sveltia accepts the reply from.
+#
+# The trailing `*` is load-bearing. An exact route (`zvb.bg/admin/auth`) is skipped for
+# a request that carries a query string, and the CMS always sends
+# `?provider=github&site_id=…&scope=…`; the request then fell through to GitHub Pages
+# and the popup showed a 404. With the wildcard, the query string makes no difference.
 routes = [
-  { pattern = "zvb.bg/admin/auth", zone_name = "zvb.bg" }
+  { pattern = "zvb.bg/admin/auth*", zone_name = "zvb.bg" }
 ]
 
 # A workers.dev hostname would be a second way to reach the endpoint. It would still
