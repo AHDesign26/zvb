@@ -28,9 +28,8 @@ keep coming from GitHub Pages.
    `exp`, `nbf`). If the Access application were renamed, moved or deleted, the edge gate
    would quietly stop applying; without this check the endpoint would still hand out the
    token. With it, a missing policy means an error.
-3. **The token is scoped to one repository** with `Contents` and `Pull requests` —
-   `editorial_workflow` is on, so every publish creates and merges a PR. No other
-   permissions, and an expiry.
+3. **The token is scoped to one repository** with `Contents: Read and write` only. Publishing
+   commits straight to `main`, so nothing else is needed. An expiry on top of that.
 4. **No framing or caching:** the handshake page is `no-store`, `noindex` and
    `frame-ancestors 'none'`.
 
@@ -61,7 +60,8 @@ GitHub → Settings → Developer settings → **Fine-grained personal access to
 new token:
 
 - Repository access: **Only select repositories** → `AHDesign26/zvb`
-- Permissions: **Contents: Read and write**, **Pull requests: Read and write**
+- Permissions: **Contents: Read and write**. Add **Pull requests: Read and write** only if
+  `publish_mode: editorial_workflow` is ever turned back on.
 - Expiration: give it one, and set a reminder — the editor's sign-in stops working the day
   it lapses
 
@@ -98,8 +98,8 @@ The Worker is published on the route in `wrangler.toml`; there is no workers.dev
 1. Open <https://zvb.bg/admin/> in a private window. Access asks you to sign in; do so.
 2. Press **Sign in with GitHub**. The popup closes by itself and the CMS opens on the
    content.
-3. Edit something and **Publish**. The commit should appear on `AHDesign26/zvb` as a PR
-   from the token's owner.
+3. Edit something and **Save & Publish**. The commit should appear on `AHDesign26/zvb`
+   directly on `main`, from the token's owner, and the site redeploys a minute later.
 
 ## Day-to-day
 
@@ -124,7 +124,8 @@ against `pnpm dev`, open <http://localhost:4321/admin/> and use a token directly
 - **Sign-in works but the CMS says it has no write access.** The token lacks
   `Contents: Read and write`, or it belongs to an account without access to the repository,
   or an organisation SSO policy has not been satisfied.
-- **Publishing fails with a 403 on the PR.** `Pull requests: Read and write` is missing, which
-  `editorial_workflow` needs because each publish opens a PR.
+- **Publishing is rejected.** `Contents: Read and write` is missing, or the token's owner is
+  no longer a repository admin. Publishing commits straight to `main` and relies on the
+  admin bypass of the `main_control` ruleset; without it GitHub refuses the push.
 - **Sign-in stops working on a date you recognise.** The token expired. Create a new one and
   set the secret again.

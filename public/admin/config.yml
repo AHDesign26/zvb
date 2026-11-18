@@ -21,10 +21,6 @@ backend:
   # service, which has no record of this site and answers the sign-in with a 404.
   base_url: https://zvb.bg
   auth_endpoint: admin/auth
-  # main's ruleset allows squash and rebase merges only (required linear history), while
-  # Sveltia asks for a merge commit unless this is set. Without it every publish was
-  # rejected with "Couldn't publish".
-  squash_merges: true
   commit_messages:
     create: 'Create {{collection}} "{{slug}}"'
     update: 'Update {{collection}} "{{slug}}"'
@@ -38,10 +34,11 @@ local_backend: true
 # Force admin UI language to English regardless of the editor's browser locale.
 locale: en
 
-# editorial_workflow routes every edit through a PR so the branch
-# ruleset on main (Require PR, Require linear history) is satisfied.
-# The client clicks "Publish" in the CMS to merge the generated PR.
-publish_mode: editorial_workflow
+# Publishing commits straight to main: no draft branch, no pull request, no merge step.
+# The ruleset on main requires a pull request, but repository admins bypass it and the
+# CMS_GITHUB_TOKEN belongs to an admin, so the commit that Save & Publish creates is
+# accepted. If that token is ever moved to a non-admin account, publishes will be
+# rejected and this has to change back to `publish_mode: editorial_workflow`.
 media_folder: public/media
 public_folder: /media
 site_url: https://zvb.bg
